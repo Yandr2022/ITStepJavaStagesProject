@@ -14,7 +14,7 @@ public class ChessPiecesLogic {
         return (x2 == x1 - 1 || x2 == x1 || x2 == x1 + 1 ) && (y2 == y1 - 1 || y2 == y1 || y2 == y1 + 1);
     }
     private static boolean checkDiagonalMove(int x1, int y1, int x2, int y2) {
-        return false;
+        return x1+y1==x2+y2||x1-y1==x2-y2;
     }
 
 

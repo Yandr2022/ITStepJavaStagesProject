@@ -25,6 +25,9 @@ public class Main {
             result = ChessPiecesLogic.checkKingMove(x1,y1,x2,y2);
             msg = result ? "Yes" : "No";
             Printer.print("\nKing: "+ msg);
+            result = ChessPiecesLogic.checkBishopMove(x1,y1,x2,y2);
+            msg = result ? "Yes" : "No";
+            Printer.print("\nBishop: "+ msg);
         } catch (IOException e) {
             Printer.printError(MSG_SAME_POINTS);
         }catch (IndexOutOfBoundsException e){
