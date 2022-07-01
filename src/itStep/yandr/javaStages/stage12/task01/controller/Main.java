@@ -21,7 +21,10 @@ public class Main {
         try {
             result = ChessPiecesLogic.checkRookMove(x1,y1,x2,y2);
             String msg = result ? "Yes" : "No";
-            Printer.print("Rook: "+ msg);
+            Printer.print("\nRook: "+ msg);
+            result = ChessPiecesLogic.checkKingMove(x1,y1,x2,y2);
+            msg = result ? "Yes" : "No";
+            Printer.print("\nKing: "+ msg);
         } catch (IOException e) {
             Printer.printError(MSG_SAME_POINTS);
         }catch (IndexOutOfBoundsException e){

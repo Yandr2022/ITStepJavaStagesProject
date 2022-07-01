@@ -11,11 +11,14 @@ public class ChessPiecesLogic {
     }
 
     private static boolean checkOneMoveAround(int x1, int y1, int x2, int y2) {
-        return (x2 == x1 - 1 || x2 == x1 || x2 == x1 + 1 )&& (y2 == y1 - 1 || y2 == y1 || y2 == y1 + 1);
+        return (x2 == x1 - 1 || x2 == x1 || x2 == x1 + 1 ) && (y2 == y1 - 1 || y2 == y1 || y2 == y1 + 1);
+    }
+    private static boolean checkDiagonalMove(int x1, int y1, int x2, int y2) {
+        return false;
     }
 
 
-    protected static void validationCoordinates(int x1, int y1, int x2, int y2) throws IOException
+    private static void validationCoordinates(int x1, int y1, int x2, int y2) throws IOException
             , IndexOutOfBoundsException {
         boolean chessboardBorder = x1 < FIRST_CHESS_SQUARE || x1 > LAST_CHESS_SQUARE
                 || y1 < FIRST_CHESS_SQUARE || y1 > LAST_CHESS_SQUARE || x2 < FIRST_CHESS_SQUARE
@@ -36,6 +39,12 @@ public class ChessPiecesLogic {
             , IndexOutOfBoundsException {
         validationCoordinates(x1, y1, x2, y2);
         return checkOneMoveAround(x1, y1, x2, y2);
+    }
+
+    public static boolean checkBishopMove(int x1, int y1, int x2, int y2) throws IOException
+            , IndexOutOfBoundsException {
+        validationCoordinates(x1,y1,x2,y2);
+        return checkDiagonalMove(x1, y1, x2, y2);
     }
 }
 
