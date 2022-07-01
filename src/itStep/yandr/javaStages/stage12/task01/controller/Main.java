@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public  static final String MSG_SAME_POINTS = "The coordinates of chessboard square 1 " +
+    public static final String MSG_SAME_POINTS = "The coordinates of chessboard square 1 " +
             "and chessboard square 2 must be different";
-    public  static final String MSG_OUT_OF_BOUND = "The coordinates are outside the chessboard";
+    public static final String MSG_OUT_OF_BOUND = "The coordinates are outside the chessboard";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Printer.print("Input 4 numbers: ");
@@ -19,18 +20,21 @@ public class Main {
         int y2 = scanner.nextInt();
         boolean result;
         try {
-            result = ChessPiecesLogic.checkRookMove(x1,y1,x2,y2);
+            result = ChessPiecesLogic.checkRookMove(x1, y1, x2, y2);
             String msg = result ? "Yes" : "No";
-            Printer.print("\nRook: "+ msg);
-            result = ChessPiecesLogic.checkKingMove(x1,y1,x2,y2);
+            Printer.print("\nRook: " + msg);
+            result = ChessPiecesLogic.checkKingMove(x1, y1, x2, y2);
             msg = result ? "Yes" : "No";
-            Printer.print("\nKing: "+ msg);
-            result = ChessPiecesLogic.checkBishopMove(x1,y1,x2,y2);
+            Printer.print("\nKing: " + msg);
+            result = ChessPiecesLogic.checkBishopMove(x1, y1, x2, y2);
             msg = result ? "Yes" : "No";
-            Printer.print("\nBishop: "+ msg);
+            Printer.print("\nBishop: " + msg);
+            result = ChessPiecesLogic.checkQueenMove(x1, y1, x2, y2);
+            msg = result ? "Yes" : "No";
+            Printer.print("\nQueen: " + msg);
         } catch (IOException e) {
             Printer.printError(MSG_SAME_POINTS);
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             Printer.printError(MSG_OUT_OF_BOUND);
         }
 

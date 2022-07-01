@@ -187,5 +187,65 @@ public class ChessPiecesLogicTest {
         }
 
     }
+    @Test
+    public void testCheckQueenStepReturnTrue() throws IOException,IndexOutOfBoundsException {
+        int x1 = 6, y1 = 4;
+        int[][] points = {{1, 4}, {2, 4}, {2, 8}, {3, 1}, {3, 4}, {3, 7}
+                , {4, 2}, {4, 4}, {4, 6}, {5, 3}, {5, 4}, {5, 5}
+                , {6, 1}, {6, 2}, {6, 3}, {6, 5}, {6, 6}, {6, 7}, {6, 8}
+                , {7, 3},{7, 4}, {7, 5}, {8, 2}, {8, 4},  {8, 6}};
+        for (int i = 0; i < points.length; i++) {
+            int x2 = points[i][0];
+            int y2 = points[i][1];
+            boolean actual = ChessPiecesLogic.checkQueenMove(x1, y1, x2, y2);
+            String error = String.format("Error with chess cell;(%d,%d)", x2, y2);
+
+            assertTrue(error, actual);
+        }
+    }
+
+    @Test
+    public void testCheckQueenStepReturnFalse() throws IOException ,IndexOutOfBoundsException{
+        int x1 = 6, y1 = 4;
+        int[][] points = {{1, 1}, {1, 2}, {1, 3}, {1, 5}, {1, 6}, {1, 7}, {1, 8}
+                , {2, 1}, {2, 2}, {2, 3}, {2, 5}, {2, 6}, {2, 7}
+                , {3, 2}, {3, 3}, {3, 5}, {3, 6}, {3, 8}
+                , {4, 1}, {4, 3}, {4, 5}, {4, 7}, {4, 8}
+                , {5, 1}, {5, 2}, {5, 6}, {5, 7}, {5, 8}
+                , {7, 1}, {7, 2}, {7, 6}, {7, 7}, {7, 8}
+                , {8, 1}, {8, 3}, {8, 5}, {8, 7}, {8, 8}};
+        for (int i = 0; i < points.length; i++) {
+            int x2 = points[i][0];
+            int y2 = points[i][1];
+            boolean actual = ChessPiecesLogic.checkQueenMove(x1, y1, x2, y2);
+            String error = String.format("Error with chess cell;(%d,%d)", x2, y2);
+            assertFalse(error, actual);
+        }
+    }
+
+    @Test(expected = IOException.class)
+    public void testCheckSameCoordinatesForQueen() throws IOException,IndexOutOfBoundsException {
+        int x1 = 6, y1 = 4;
+        ChessPiecesLogic.checkQueenMove(x1, y1, x1, y1);
+
+    }
+
+    @Test
+    public void testCheckCoordinatesOutOFChessboardForQueen() throws IndexOutOfBoundsException, IOException {
+        for (int i = 0; i < POINTS_OUTSIDE_CHESSBOARD.length; i++) {
+            int[] point = POINTS_OUTSIDE_CHESSBOARD[i];
+            int x1 = point[0];
+            int y1 = point[1];
+            int x2 = point[2];
+            int y2 = point[3];
+            try {
+                ChessPiecesLogic.checkQueenMove(x1, y1, x2, y2);
+                fail(String.format("The coordinates x1:%d, y1:%d, x2:%d, y2:%d - should have been thrown " +
+                        "IndexOutOfBoundsException \n", x1, y1, x2, y2));
+            } catch (IndexOutOfBoundsException e) {
+            }
+        }
+
+    }
 
 }

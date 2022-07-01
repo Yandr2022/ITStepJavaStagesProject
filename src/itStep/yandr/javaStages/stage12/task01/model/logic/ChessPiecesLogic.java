@@ -13,8 +13,9 @@ public class ChessPiecesLogic {
     private static boolean checkOneMoveAround(int x1, int y1, int x2, int y2) {
         return (x2 == x1 - 1 || x2 == x1 || x2 == x1 + 1 ) && (y2 == y1 - 1 || y2 == y1 || y2 == y1 + 1);
     }
+
     private static boolean checkDiagonalMove(int x1, int y1, int x2, int y2) {
-        return x1+y1==x2+y2||x1-y1==x2-y2;
+        return x1 + y1 == x2 + y2 || x1 - y1 == x2 - y2;
     }
 
 
@@ -45,6 +46,12 @@ public class ChessPiecesLogic {
             , IndexOutOfBoundsException {
         validationCoordinates(x1,y1,x2,y2);
         return checkDiagonalMove(x1, y1, x2, y2);
+    }
+
+    public static boolean checkQueenMove(int x1, int y1, int x2, int y2) throws IOException
+            , IndexOutOfBoundsException {
+        validationCoordinates(x1, y1, x2, y2);
+        return checkHorizontalAndVerticalMove(x1, y1, x2, y2)||checkDiagonalMove(x1,y1,x2,y2);
     }
 }
 
