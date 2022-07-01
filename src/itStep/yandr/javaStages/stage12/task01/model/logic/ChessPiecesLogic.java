@@ -9,8 +9,9 @@ public class ChessPiecesLogic {
     private static boolean checkHorizontalAndVerticalMove(int x1, int y1, int x2, int y2) {
         return (x1 == x2 && y1 != y2 || y1 == y2 && x1 != x2);
     }
-    private static boolean checkOneMoveAround (int x1, int y1, int x2, int y2) {
-        return false;
+
+    private static boolean checkOneMoveAround(int x1, int y1, int x2, int y2) {
+        return (x2 == x1 - 1 || x2 == x1 || x2 == x1 + 1 )&& (y2 == y1 - 1 || y2 == y1 || y2 == y1 + 1);
     }
 
 
@@ -31,9 +32,10 @@ public class ChessPiecesLogic {
         return checkHorizontalAndVerticalMove(x1, y1, x2, y2);
     }
 
-        public static boolean checkKingMove(int x1, int y1, int x2, int y2)throws IOException
-                , IndexOutOfBoundsException {
-            return false;
-        }
+    public static boolean checkKingMove(int x1, int y1, int x2, int y2) throws IOException
+            , IndexOutOfBoundsException {
+        validationCoordinates(x1, y1, x2, y2);
+        return checkOneMoveAround(x1, y1, x2, y2);
     }
+}
 

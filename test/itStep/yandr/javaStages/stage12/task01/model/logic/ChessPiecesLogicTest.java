@@ -73,9 +73,9 @@ public class ChessPiecesLogicTest {
     @Test
     public void testCheckKingMoveReturnTrue() throws IOException {
         int x1 = 5, y1 = 3;
-        int[][] points = {{4, 2},{4,3},{4,4},{5,2}, {5,4}, {6, 2}, {6, 3}, {6, 4}};
+        int[][] points = {{4, 2}, {4, 3}, {4, 4}, {5, 2}, {5, 4}, {6, 2}, {6, 3}, {6, 4}};
         for (int i = 0; i < points.length; i++) {
-            int[]point = points[i];
+            int[] point = points[i];
             int x2 = point[0];
             int y2 = point[1];
             boolean actual = ChessPiecesLogic.checkKingMove(x1, y1, x2, y2);
