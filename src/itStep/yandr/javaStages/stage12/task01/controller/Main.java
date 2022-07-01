@@ -11,8 +11,6 @@ public class Main {
             "and chessboard square 2 must be different";
     public  static final String MSG_OUT_OF_BOUND = "The coordinates are outside the chessboard";
     public static void main(String[] args) {
-
-
         Scanner scanner = new Scanner(System.in);
         Printer.print("Input 4 numbers: ");
         int x1 = scanner.nextInt();
@@ -21,7 +19,7 @@ public class Main {
         int y2 = scanner.nextInt();
         boolean result;
         try {
-            result = ChessPiecesLogic.chessRockStep(x1,y1,x2,y2);
+            result = ChessPiecesLogic.checkRookMove(x1,y1,x2,y2);
             String msg = result ? "Yes" : "No";
             Printer.print("Rook: "+ msg);
         } catch (IOException e) {
