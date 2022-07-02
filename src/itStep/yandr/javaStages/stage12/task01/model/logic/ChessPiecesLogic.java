@@ -6,7 +6,7 @@ public class ChessPiecesLogic {
     public static final int FIRST_CHESS_SQUARE = 1;
     public static final int LAST_CHESS_SQUARE = 8;
 
-    private static boolean checkHorizontalAndVerticalMove(int x1, int y1, int x2, int y2) {
+    private static boolean checkRankAndFileMove(int x1, int y1, int x2, int y2) {
         return (x1 == x2 && y1 != y2 || y1 == y2 && x1 != x2);
     }
 
@@ -36,7 +36,7 @@ public class ChessPiecesLogic {
 
     public static boolean checkRookMove(int x1, int y1, int x2, int y2) throws IOException, IndexOutOfBoundsException {
         validationCoordinates(x1, y1, x2, y2);
-        return checkHorizontalAndVerticalMove(x1, y1, x2, y2);
+        return checkRankAndFileMove(x1, y1, x2, y2);
     }
 
     public static boolean checkKingMove(int x1, int y1, int x2, int y2) throws IOException
@@ -54,7 +54,7 @@ public class ChessPiecesLogic {
     public static boolean checkQueenMove(int x1, int y1, int x2, int y2) throws IOException
             , IndexOutOfBoundsException {
         validationCoordinates(x1, y1, x2, y2);
-        return checkHorizontalAndVerticalMove(x1, y1, x2, y2)||checkDiagonalMove(x1,y1,x2,y2);
+        return checkRankAndFileMove(x1, y1, x2, y2)||checkDiagonalMove(x1,y1,x2,y2);
     }
 
     public static boolean checkKnightMove(int x1, int y1, int x2, int y2) throws IOException
@@ -62,5 +62,6 @@ public class ChessPiecesLogic {
         validationCoordinates(x1, y1, x2, y2);
         return checkLShapeMove(x1, y1, x2, y2);
     }
+
 }
 
