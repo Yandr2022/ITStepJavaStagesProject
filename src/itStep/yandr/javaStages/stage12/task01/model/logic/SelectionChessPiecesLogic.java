@@ -11,7 +11,7 @@ public class SelectionChessPiecesLogic {
     private static final String KNIGHT_NAME = "knight";
 
     public static boolean checkMoveChessPieceWithSelected(String chessPieceName, int x1, int y1, int x2, int y2)
-            throws IOException {
+            throws IOException, IllegalArgumentException {
         chessPieceName = chessPieceName.toLowerCase();
         boolean result;
         switch (chessPieceName) {

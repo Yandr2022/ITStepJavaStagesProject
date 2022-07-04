@@ -12,11 +12,25 @@ public class InputManager {
             num = scanner.nextInt();
 
         } else {
-            System.out.println("Number not determined, try again");
+            System.err.println("Number not determined, try again");
             scanner.next();
             num = getInt();
         }
         return num;
     }
 
+    //    name.matches("[A-Za-z]") почему-то не работал((
+    public static String getStringWithLetter() {
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.next();
+        for (int i = 0; i < name.length(); i++) {
+            char charValue = name.charAt(i);
+            if (!Character.isLetter(charValue)) {
+                System.err.println("Letter not determined, try again");
+                scanner.next();
+                name = getStringWithLetter();
+            }
+        }
+        return name;
+    }
 }
