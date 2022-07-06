@@ -1,5 +1,8 @@
 package itStep.yandr.javaStages.stage12.task01.model.logic;
 
+import itStep.yandr.javaStages.stage12.task01.exception.OutOfRangeValueException;
+import itStep.yandr.javaStages.stage12.task01.exception.SameCoordinatesException;
+
 import java.io.IOException;
 
 public class ChessPiecesLogic {
@@ -22,43 +25,46 @@ public class ChessPiecesLogic {
     }
 
 
-    private static void validationCoordinates(int x1, int y1, int x2, int y2) throws IOException
-            , IndexOutOfBoundsException {
+    private static void validationCoordinates(int x1, int y1, int x2, int y2) throws SameCoordinatesException
+            , OutOfRangeValueException {
         boolean chessboardBorder = x1 < FIRST_CHESS_SQUARE || x1 > LAST_CHESS_SQUARE
                 || y1 < FIRST_CHESS_SQUARE || y1 > LAST_CHESS_SQUARE || x2 < FIRST_CHESS_SQUARE
                 || x2 > LAST_CHESS_SQUARE || y2 < FIRST_CHESS_SQUARE || y2 > LAST_CHESS_SQUARE;
         if (x1 == x2 && y2 == y1) {
-            throw new IOException();
+            throw new SameCoordinatesException();
         } else if (chessboardBorder) {
-            throw new IndexOutOfBoundsException();
+            throw new OutOfRangeValueException();
         }
     }
 
-    public static boolean checkRookMove(int x1, int y1, int x2, int y2) throws IOException, IndexOutOfBoundsException {
+
+    public static boolean checkRookMove(int x1, int y1, int x2, int y2) throws SameCoordinatesException
+            , OutOfRangeValueException {
+
         validationCoordinates(x1, y1, x2, y2);
         return checkRankAndFileMove(x1, y1, x2, y2);
     }
 
-    public static boolean checkKingMove(int x1, int y1, int x2, int y2) throws IOException
-            , IndexOutOfBoundsException {
+    public static boolean checkKingMove(int x1, int y1, int x2, int y2) throws SameCoordinatesException
+            , OutOfRangeValueException {
         validationCoordinates(x1, y1, x2, y2);
         return checkOneMoveAround(x1, y1, x2, y2);
     }
 
-    public static boolean checkBishopMove(int x1, int y1, int x2, int y2) throws IOException
-            , IndexOutOfBoundsException {
+    public static boolean checkBishopMove(int x1, int y1, int x2, int y2) throws SameCoordinatesException
+            , OutOfRangeValueException {
         validationCoordinates(x1,y1,x2,y2);
         return checkDiagonalMove(x1, y1, x2, y2);
     }
 
-    public static boolean checkQueenMove(int x1, int y1, int x2, int y2) throws IOException
-            , IndexOutOfBoundsException {
+    public static boolean checkQueenMove(int x1, int y1, int x2, int y2) throws SameCoordinatesException
+            , OutOfRangeValueException {
         validationCoordinates(x1, y1, x2, y2);
         return checkRankAndFileMove(x1, y1, x2, y2)||checkDiagonalMove(x1,y1,x2,y2);
     }
 
-    public static boolean checkKnightMove(int x1, int y1, int x2, int y2) throws IOException
-            , IndexOutOfBoundsException {
+    public static boolean checkKnightMove(int x1, int y1, int x2, int y2) throws SameCoordinatesException
+            , OutOfRangeValueException {
         validationCoordinates(x1, y1, x2, y2);
         return checkLShapeMove(x1, y1, x2, y2);
     }
