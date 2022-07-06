@@ -1,6 +1,8 @@
 package itStep.yandr.javaStages.stage12.task01.model.logic;
 
 
+import itStep.yandr.javaStages.stage12.task01.exception.OutOfRangeValueException;
+import itStep.yandr.javaStages.stage12.task01.exception.SameCoordinatesException;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -15,7 +17,7 @@ public class ChessPiecesLogicTest {
     };
 
     @Test
-    public void testCheckRockStepReturnTrue() throws IOException,IndexOutOfBoundsException {
+    public void testCheckRockMoveReturnTrue() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 4, y1 = 4;
         int[][] points = {{1, 4}, {2, 4}, {3, 4}, {5, 4}, {6, 4}, {7, 4}, {8, 4}, {4, 1}
                 , {4, 2}, {4, 3}, {4, 5}, {4, 6}, {4, 7}, {4, 8}};
@@ -30,7 +32,7 @@ public class ChessPiecesLogicTest {
     }
 
     @Test
-    public void testCheckRookStepReturnFalse() throws IOException ,IndexOutOfBoundsException{
+    public void testCheckRookMoveReturnFalse() throws SameCoordinatesException, OutOfRangeValueException{
         int x1 = 4, y1 = 4;
         int[][] points = {{1, 1}, {1, 2}, {1, 3}, {1, 5}, {1, 6}, {1, 7}, {1, 8}, {2, 1}, {2, 2}, {2, 3}, {2, 5}, {2, 6}
                 , {2, 7}, {2, 8}, {3, 1}, {3, 2}, {3, 3}, {3, 5}, {3, 6}, {3, 7}, {3, 8}, {5, 1}, {5, 2}, {5, 3},
@@ -45,15 +47,15 @@ public class ChessPiecesLogicTest {
         }
     }
 
-    @Test(expected = IOException.class)
-    public void testCheckSameCoordinatesForRook() throws IOException,IndexOutOfBoundsException {
+    @Test(expected = SameCoordinatesException.class)
+    public void testCheckSameCoordinatesForRook() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 5, y1 = 4;
         ChessPiecesLogic.checkRookMove(x1, y1, x1, y1);
 
     }
 
     @Test
-    public void testCheckCoordinatesOutOFChessboardForRook() throws IndexOutOfBoundsException, IOException {
+    public void testCheckCoordinatesOutOFChessboardForRook() throws SameCoordinatesException {
         for (int i = 0; i < POINTS_OUTSIDE_CHESSBOARD.length; i++) {
             int[] point = POINTS_OUTSIDE_CHESSBOARD[i];
             int x1 = point[0];
@@ -63,15 +65,15 @@ public class ChessPiecesLogicTest {
             try {
                 ChessPiecesLogic.checkRookMove(x1, y1, x2, y2);
                 fail(String.format("The coordinates x1:%d, y1:%d, x2:%d, y2:%d - should have been thrown " +
-                        "IndexOutOfBoundsException \n", x1, y1, x2, y2));
-            } catch (IndexOutOfBoundsException e) {
+                        "OutOfRangeValueException \n", x1, y1, x2, y2));
+            } catch (OutOfRangeValueException e) {
             }
         }
 
     }
 
     @Test
-    public void testCheckKingMoveReturnTrue() throws IOException, IndexOutOfBoundsException {
+    public void testCheckKingMoveReturnTrue() throws SameCoordinatesException, OutOfRangeValueException  {
         int x1 = 5, y1 = 3;
         int[][] points = {{4, 2}, {4, 3}, {4, 4}, {5, 2}, {5, 4}, {6, 2}, {6, 3}, {6, 4}};
         for (int i = 0; i < points.length; i++) {
@@ -85,7 +87,7 @@ public class ChessPiecesLogicTest {
     }
 
     @Test
-    public void testCheckKingMoveReturnFalse() throws IOException, IndexOutOfBoundsException {
+    public void testCheckKingMoveReturnFalse() throws SameCoordinatesException, OutOfRangeValueException  {
         int x1 = 5, y1 = 3;
         int[][] points = {{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8}
                 , {2, 1}, {2, 2},{2, 3}, {2, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8}
@@ -105,15 +107,15 @@ public class ChessPiecesLogicTest {
         }
     }
 
-    @Test(expected = IOException.class)
-    public void testCheckSameCoordinatesForKing() throws IOException, IndexOutOfBoundsException {
+    @Test(expected = SameCoordinatesException.class)
+    public void testCheckSameCoordinatesForKing() throws SameCoordinatesException, OutOfRangeValueException  {
         int x1 = 5, y1 = 4;
         ChessPiecesLogic.checkKingMove(x1, y1, x1, y1);
 
     }
 
     @Test
-    public void testCheckCoordinatesOutOFChessboardForKing() throws IndexOutOfBoundsException, IOException {
+    public void testCheckCoordinatesOutOFChessboardForKing() throws SameCoordinatesException{
         for (int i = 0; i < POINTS_OUTSIDE_CHESSBOARD.length; i++) {
             int[] point = POINTS_OUTSIDE_CHESSBOARD[i];
             int x1 = point[0];
@@ -123,13 +125,13 @@ public class ChessPiecesLogicTest {
             try {
                 ChessPiecesLogic.checkKingMove(x1, y1, x2, y2);
                 fail(String.format("The coordinates x1:%d, y1:%d, x2:%d, y2:%d - should have been thrown " +
-                        "IndexOutOfBoundsException \n", x1, y1, x2, y2));
-            } catch (IndexOutOfBoundsException e) {
+                        "OutOfRangeValueException \n", x1, y1, x2, y2));
+            } catch (OutOfRangeValueException e) {
             }
         }
     }
     @Test
-    public void testCheckBishopStepReturnTrue() throws IOException, IndexOutOfBoundsException {
+    public void testCheckBishopMoveReturnTrue() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 6, y1 = 4;
         int[][] points = {{3, 1}, {4, 2}, {5, 3}, {7, 5}, {8, 6}, {8, 2}, {7, 3}
                 , {5, 5}, {4, 6}, {3, 7}, {2, 8}};
@@ -144,7 +146,7 @@ public class ChessPiecesLogicTest {
     }
 
     @Test
-    public void testCheckBishopStepReturnFalse() throws IOException, IndexOutOfBoundsException {
+    public void testCheckBishopMoveReturnFalse() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 6, y1 = 4;
         int[][] points = {{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8}
                 , {2, 1}, {2, 2}, {2, 3},{2, 4}, {2, 5}, {2, 6}, {2, 7}
@@ -163,15 +165,15 @@ public class ChessPiecesLogicTest {
         }
     }
 
-    @Test(expected = IOException.class)
-    public void testCheckSameCoordinatesForBishop() throws IOException, IndexOutOfBoundsException {
+    @Test(expected = SameCoordinatesException.class)
+    public void testCheckSameCoordinatesForBishop() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 6, y1 = 4;
         ChessPiecesLogic.checkBishopMove(x1, y1, x1, y1);
 
     }
 
     @Test
-    public void testCheckCoordinatesOutOFChessboardForBishop() throws IndexOutOfBoundsException, IOException {
+    public void testCheckCoordinatesOutOFChessboardForBishop() throws SameCoordinatesException {
         for (int i = 0; i < POINTS_OUTSIDE_CHESSBOARD.length; i++) {
             int[] point = POINTS_OUTSIDE_CHESSBOARD[i];
             int x1 = point[0];
@@ -181,14 +183,14 @@ public class ChessPiecesLogicTest {
             try {
                 ChessPiecesLogic.checkBishopMove(x1, y1, x2, y2);
                 fail(String.format("The coordinates x1:%d, y1:%d, x2:%d, y2:%d - should have been thrown " +
-                        "IndexOutOfBoundsException \n", x1, y1, x2, y2));
-            } catch (IndexOutOfBoundsException e) {
+                        "OutOfRangeValueException \n", x1, y1, x2, y2));
+            } catch (OutOfRangeValueException e) {
             }
         }
 
     }
     @Test
-    public void testCheckQueenStepReturnTrue() throws IOException,IndexOutOfBoundsException {
+    public void testCheckQueenMoveReturnTrue() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 6, y1 = 4;
         int[][] points = {{1, 4}, {2, 4}, {2, 8}, {3, 1}, {3, 4}, {3, 7}
                 , {4, 2}, {4, 4}, {4, 6}, {5, 3}, {5, 4}, {5, 5}
@@ -205,7 +207,7 @@ public class ChessPiecesLogicTest {
     }
 
     @Test
-    public void testCheckQueenStepReturnFalse() throws IOException ,IndexOutOfBoundsException{
+    public void testCheckQueenMoveReturnFalse() throws SameCoordinatesException, OutOfRangeValueException{
         int x1 = 6, y1 = 4;
         int[][] points = {{1, 1}, {1, 2}, {1, 3}, {1, 5}, {1, 6}, {1, 7}, {1, 8}
                 , {2, 1}, {2, 2}, {2, 3}, {2, 5}, {2, 6}, {2, 7}
@@ -223,15 +225,15 @@ public class ChessPiecesLogicTest {
         }
     }
 
-    @Test(expected = IOException.class)
-    public void testCheckSameCoordinatesForQueen() throws IOException,IndexOutOfBoundsException {
+    @Test(expected = SameCoordinatesException.class)
+    public void testCheckSameCoordinatesForQueen() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 6, y1 = 4;
         ChessPiecesLogic.checkQueenMove(x1, y1, x1, y1);
 
     }
 
     @Test
-    public void testCheckCoordinatesOutOFChessboardForQueen() throws IndexOutOfBoundsException, IOException {
+    public void testCheckCoordinatesOutOFChessboardForQueen() throws SameCoordinatesException{
         for (int i = 0; i < POINTS_OUTSIDE_CHESSBOARD.length; i++) {
             int[] point = POINTS_OUTSIDE_CHESSBOARD[i];
             int x1 = point[0];
@@ -241,15 +243,15 @@ public class ChessPiecesLogicTest {
             try {
                 ChessPiecesLogic.checkQueenMove(x1, y1, x2, y2);
                 fail(String.format("The coordinates x1:%d, y1:%d, x2:%d, y2:%d - should have been thrown " +
-                        "IndexOutOfBoundsException \n", x1, y1, x2, y2));
-            } catch (IndexOutOfBoundsException e) {
+                        "OutOfRangeValueException \n", x1, y1, x2, y2));
+            } catch (OutOfRangeValueException e) {
             }
         }
 
     }
 
     @Test
-    public void testCheckKnightMoveReturnTrue() throws IOException, IndexOutOfBoundsException {
+    public void testCheckKnightMoveReturnTrue() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 3, y1 = 6;
         int[][] points = {{1, 5}, {1, 7}, {2, 4}, {2, 8}, {4, 4}, {4, 8}, {5, 5}, {5, 7}};
         for (int i = 0; i < points.length; i++) {
@@ -263,7 +265,7 @@ public class ChessPiecesLogicTest {
     }
 
     @Test
-    public void testCheckKnightMoveReturnFalse() throws IOException, IndexOutOfBoundsException {
+    public void testCheckKnightMoveReturnFalse() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 3, y1 = 6;
         int[][] points = {{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 6}, {1, 8}
                 , {2, 1}, {2, 2},{2, 3}, {2, 5}, {2, 6}, {2, 7}
@@ -283,15 +285,15 @@ public class ChessPiecesLogicTest {
         }
     }
 
-    @Test(expected = IOException.class)
-    public void testCheckSameCoordinatesForKnight() throws IOException, IndexOutOfBoundsException {
+    @Test(expected = SameCoordinatesException.class)
+    public void testCheckSameCoordinatesForKnight() throws SameCoordinatesException, OutOfRangeValueException {
         int x1 = 3, y1 = 6;
         ChessPiecesLogic.checkKnightMove(x1, y1, x1, y1);
 
     }
 
     @Test
-    public void testCheckCoordinatesOutOFChessboardForKnight() throws IndexOutOfBoundsException, IOException {
+    public void testCheckCoordinatesOutOFChessboardForKnight() throws SameCoordinatesException{
         for (int i = 0; i < POINTS_OUTSIDE_CHESSBOARD.length; i++) {
             int[] point = POINTS_OUTSIDE_CHESSBOARD[i];
             int x1 = point[0];
@@ -301,8 +303,8 @@ public class ChessPiecesLogicTest {
             try {
                 ChessPiecesLogic.checkKnightMove(x1, y1, x2, y2);
                 fail(String.format("The coordinates x1:%d, y1:%d, x2:%d, y2:%d - should have been thrown " +
-                        "IndexOutOfBoundsException \n", x1, y1, x2, y2));
-            } catch (IndexOutOfBoundsException e) {
+                        "OutOfRangeValueException  \n", x1, y1, x2, y2));
+            } catch (OutOfRangeValueException  e) {
             }
         }
     }
