@@ -18,7 +18,7 @@ public class MSGBuilderTest {
             , OutOfRangeValueException, InvalidSizeOfArray {
         String actual = MSGBuilder.buildMSGtoResultForAllChessPieces(SelectionChessPiecesLogic
                 .checkMoveAllChessPiece(5, 6, 7, 8));
-        String expected = "Rook : No\nKing : No\nBishop : Yes\nQueen : Yes\n";
+        String expected = "Rook : No\nKing : No\nBishop : Yes\nQueen : Yes\nKnight : No\n";
         assertEquals(actual, expected);
     }
 

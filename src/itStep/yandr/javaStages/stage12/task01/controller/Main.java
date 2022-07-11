@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final String MSG_WRONG_DATA = "Entered data is not valid";
+    public static final String MSG_WRONG_DATA = "Entered data is not valid\n";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -45,11 +45,8 @@ public class Main {
                     break;
                 default:
                     throw new IOException();
-
             }
-
             Printer.print(msg);
-
         } catch (SameCoordinatesException e) {
             e.printStackTrace();
         } catch (OutOfRangeValueException e) {

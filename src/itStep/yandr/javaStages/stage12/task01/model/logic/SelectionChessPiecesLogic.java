@@ -2,7 +2,6 @@ package itStep.yandr.javaStages.stage12.task01.model.logic;
 
 import itStep.yandr.javaStages.stage12.task01.exception.OutOfRangeValueException;
 import itStep.yandr.javaStages.stage12.task01.exception.SameCoordinatesException;
-import itStep.yandr.javaStages.stage12.task01.view.Printer;
 
 import java.io.IOException;
 
@@ -14,10 +13,7 @@ public class SelectionChessPiecesLogic {
     private static final String QUEEN_NAME = "queen";
     private static final String KNIGHT_NAME = "knight";
     public static final int AMOUNT_CHESS_PIECES = 5;
-    public static final String MSG_SAME_POINTS = "The coordinates of chessboard square 1 " +
-            "and chessboard square 2 must be different";
-    public static final String MSG_OUT_OF_BOUND = "The coordinates are outside the chessboard";
-    public static final String MSG_WRONG_NAME_CHESS_PIECE = "The name of chess piece not found";
+
 
     /**
      * @return an array with the results of checking moves for chess pieces in the following sequence: Rook, King

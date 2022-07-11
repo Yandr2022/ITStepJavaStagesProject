@@ -3,7 +3,6 @@ package itStep.yandr.javaStages.stage12.task01.model.logic;
 import itStep.yandr.javaStages.stage12.task01.exception.OutOfRangeValueException;
 import itStep.yandr.javaStages.stage12.task01.exception.SameCoordinatesException;
 
-import java.io.IOException;
 
 public class ChessPiecesLogic {
     public static final int FIRST_CHESS_SQUARE = 1;

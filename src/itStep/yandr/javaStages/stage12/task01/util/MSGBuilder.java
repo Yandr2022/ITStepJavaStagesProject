@@ -20,7 +20,7 @@ public class MSGBuilder {
         String[] NamesChessPieces = {ROOK_NAME, KING_NAME, BISHOP_NAME, QUEEN_NAME, KNIGHT_NAME};
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < NamesChessPieces.length - 1; i++) {
+        for (int i = 0; i < NamesChessPieces.length ; i++) {
             builder.append(NamesChessPieces[i] + " : ").append(results[i] ? "Yes\n" : "No\n");
         }
         return builder + "";

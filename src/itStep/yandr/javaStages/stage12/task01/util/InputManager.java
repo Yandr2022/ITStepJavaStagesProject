@@ -17,7 +17,6 @@ public class InputManager {
         return num;
     }
 
-    //    name.matches("[A-Za-z]") почему-то не заработал((
     public static String getStringWithLetter() {
         Scanner scanner = new Scanner(System.in);
         String name = scanner.next();
