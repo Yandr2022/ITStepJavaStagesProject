@@ -3,6 +3,7 @@ package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 import itStep.yandr.javaStages.stage13.generalTask.exception.InvalidSizeOfArray;
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ArrayManager.*;
@@ -49,12 +50,10 @@ public class ArrayManagerTest {
     @Test
     public void testFindMaxValueIndexWithOneDifferentElements() throws InvalidSizeOfArray {
         double[] []arrays = {{0, -1.4, -1.4, -1.4, -1.4,},{1.4, 1.4, 0, 1.4, 1.4,}};
-        double[] expected = {0,0};
-        int index = 0;
+        double expected = 0;
         for (double array[] : arrays) {
             String error = "Error with values:\n" + Arrays.toString(array) ;
-            Assert.assertEquals(error, expected[index], findMaxValueIndex(array), 0.000001);
-            index++;
+            Assert.assertEquals(error, expected, findMaxValueIndex(array), 0.000001);
         }
     }
 
@@ -203,9 +202,9 @@ public class ArrayManagerTest {
     @Test
     public void testSwapMinMaxWithAllDifferentElements() throws InvalidSizeOfArray {
         double[][] arrays = {{-1.4, -0.5, -5.0, -3.8, -2.76}, {-6.89, 5.788, 0, 3.12, -7.68}
-                , {1.2, 4.6, 8.5, 3.0, 12.6, 6.6}};
+                , {1.2, 4.6, 8.5, 3.0, 12.6, 6.6},{1, 2.5}};
         double[][] expected = {{-1.4, -5.0, -0.5, -3.8, -2.76}, {-6.89, -7.68, 0, 3.12, 5.788}
-                , {12.6, 4.6, 8.5, 3.0, 1.2, 6.6}};
+                , {12.6, 4.6, 8.5, 3.0, 1.2, 6.6},{2.5, 1}};
         int index = 0;
         for (double array[] : arrays) {
             swapMinMaxElements(array);
@@ -259,7 +258,103 @@ public class ArrayManagerTest {
             }
         }
     }
+
+    @Test
+    public void testCalculateSumOfAbsoluteValuesAreLessThanAverage() throws InvalidSizeOfArray {
+        double[][] arrays = {{-0.5, -1.4, -0.5, -5.0, -3.8, -2.76}, {-6.89, 5.788, -0.005, 0.005, 5.788, 3.1, -7.68}
+                , {1.2, 4.6, 8.5, 3.0, 12.6, 8.5, 6.6}};
+        double[] expected = {-2.4, 0, 8.8};
+        int i = 0;
+        for (double[] array : arrays) {
+            Assert.assertEquals(expected[i], calculateSumOfAbsoluteValuesAreLessThanAverage(array), 0.0001);
+            System.out.println(calculateArithmeticAverage(array));
+            i++;
+        }
+    }
+
+    @Test
+    public void testCalculateSumOfAbsoluteValuesAreLessThanAverageWithOneElements() throws InvalidSizeOfArray {
+        double expected = 0;
+        assertEquals(expected, calculateSumOfAbsoluteValuesAreLessThanAverage(new double[]{3}), 0.0001);
+    }
+
+    @Test
+    public void testCalculateSumOfAbsoluteValuesAreLessThanAverageWithAllTheSameElements() throws InvalidSizeOfArray {
+        double arrays[][] = {{ 0, 0,  0, 0, 0}, { 1.2, 1.2, 1.2, 1.2}
+                , {-5.89, -5.89, -5.89}};
+        double expected[] = { 0, 0, 0};
+        int index = 0;
+        for (double array[] : arrays) {
+            String error = "Error with value" + Arrays.toString(array);
+            Assert.assertEquals(error, expected[index], calculateSumOfAbsoluteValuesAreLessThanAverage(array), 0.001);
+            index++;
+        }
+    }
+
+    @Test
+    public void testCalculateSumOfAbsoluteValuesAreLessThanAverageWithInvalidSizeOfArray() {
+        for (int i = 0; i < INVALID_ARRAYS.length - 1; i++) {
+            try {
+                calculateSumOfAbsoluteValuesAreLessThanAverage(INVALID_ARRAYS[i]);
+                fail("The array with " + Arrays.toString(INVALID_ARRAYS[i]) + " should have been thrown " +
+                        "InvalidSizeOfArrayException ");
+            } catch (InvalidSizeOfArray e) {
+            }
+        }
+    }
+
+    @Test
+    public void testCalculateResultMultiplyingPositiveElementsInTheRightPlacesWithCountEvenElements() throws InvalidSizeOfArray {
+        double[][] arrays = {{-0.5, 2.3, 6.0, 5, -4.0, -2.76}, {7, 6.75, -5, -34, 5.7, 3.2, -7.68, 2}
+                , {1.2, -4.6, 8.5, 20},{12.6, 8}, {3.0, 2.25, 6.0, -58, 47, 9, -2, -4, 12, 42}};
+        double expected[] = {11.5, 43.2, 20, 8, 850.5};
+        int index = 0;
+        for (double array[] : arrays) {
+            String error = "Error with value" + Arrays.toString(array);
+            Assert.assertEquals(error, expected[index], calculateResultMultiplyingPositiveElementsInTheRightPlaces(array), 0.001);
+            index++;
+        }
+    }
+    @Test
+    public void testCalculateResultMultiplyingPositiveElementsInTheRightPlacesWithCountOddElements() throws InvalidSizeOfArray {
+        double[][] arrays = {{-0.5, 2.3, 6.0, 5, -4.0, -2.76, 4}, {7, 6.75, -5, -34, 5.7, 3.2, -7.68, 2, 6}
+                , {1.2, -4.6, 8.5, 20, 3.5},{12.6, 8, 5.9}, {3.0, 2.25, 6.0, -58, 47, 9, -2, -4, 12, 42, 1.45}};
+        double expected[] = {11.5, 43.2, 20, 8, 850.5};
+        int index = 0;
+        for (double array[] : arrays) {
+            String error = "Error with value" + Arrays.toString(array);
+            Assert.assertEquals(error, expected[index], calculateResultMultiplyingPositiveElementsInTheRightPlaces(array), 0.0001);
+            index++;
+        }
+    }
+    @Test
+    public void testCalculateResultMultiplyingPositiveElementsInTheRightPlacesWithoutCorrespondingElements()
+            throws InvalidSizeOfArray {
+        double[][] arrays = {{-0.5, 0, 6.0, -5, 4.0, -2.76, 4}, { 6.75, -5, -34, -4.6, 3.2, -7.68, 2, 0}
+                , {1.2, -4.6, 8.5, -2.0, 3.5},{12.6,0, 5.9}, {3.0, -2.25, 6.0, -58, 47, -9, -2, -4, 12, -42},{ 2, 0}};
+        double expected = 0;
+        for (double array[] : arrays) {
+            String error = "Error with value" + Arrays.toString(array);
+            Assert.assertEquals(error, expected, calculateResultMultiplyingPositiveElementsInTheRightPlaces(array), 0.0001);
+        }
+    }
+
+    @Test
+    public void testCalculateResultMultiplyingPositiveElementsInTheRightPlacesWithInvalidSizeOfArray() {
+        for (double[] array : INVALID_ARRAYS) {
+            try {
+                calculateResultMultiplyingPositiveElementsInTheRightPlaces(array);
+                fail("The array with " + Arrays.toString(array) + " should have been thrown " +
+                        "InvalidSizeOfArrayException ");
+            } catch (InvalidSizeOfArray e) {
+            }
+        }
+    }
+
+
+
 }
+
 
 
 

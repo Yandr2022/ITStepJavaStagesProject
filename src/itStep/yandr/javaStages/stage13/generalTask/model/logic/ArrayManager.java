@@ -4,20 +4,20 @@ import itStep.yandr.javaStages.stage13.generalTask.exception.InvalidSizeOfArray;
 
 public class ArrayManager {
 
-    private static void ValidateArrayForFindAndSwapExtrems(double[] array) throws InvalidSizeOfArray {
+    private static void ValidateArrayIncludingArrayWithOneElement(double[] array) throws InvalidSizeOfArray {
         if (array == null || array.length < 2) {
             throw new InvalidSizeOfArray();
         }
     }
 
-    private static void ValidateArrayForFindArithmeticAverage(double[] array) throws InvalidSizeOfArray {
+    private static void ValidateArrayExcludingArrayWithOneElement(double[] array) throws InvalidSizeOfArray {
         if (array == null || array.length == 0) {
             throw new InvalidSizeOfArray();
         }
     }
 
     public static int findMaxValueIndex(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayForFindAndSwapExtrems(array);
+        ValidateArrayIncludingArrayWithOneElement(array);
         int max = 0;
         for (int i = 1; i < array.length; i++) {
             if (array[i] > array[max]) {
@@ -28,7 +28,7 @@ public class ArrayManager {
     }
 
     public static int findMinValueIndex(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayForFindAndSwapExtrems(array);
+        ValidateArrayIncludingArrayWithOneElement(array);
         int min = 0;
         for (int i = 1; i < array.length; i++) {
             if (array[i] < array[min]) {
@@ -39,7 +39,7 @@ public class ArrayManager {
     }
 
     public static double calculateArithmeticAverage(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayForFindArithmeticAverage(array);
+        ValidateArrayExcludingArrayWithOneElement(array);
         if (array.length == 1) {
             return array[0];
         }
@@ -51,11 +51,39 @@ public class ArrayManager {
     }
 
     public static void swapMinMaxElements(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayForFindAndSwapExtrems(array);
+        ValidateArrayIncludingArrayWithOneElement(array);
         int minI = findMinValueIndex(array);
         int maxI = findMaxValueIndex(array);
         double temp = array[maxI];
         array[maxI] = array[minI];
         array[minI] = temp;
+    }
+
+    public static double calculateSumOfAbsoluteValuesAreLessThanAverage(double[]array) throws InvalidSizeOfArray {
+        ValidateArrayExcludingArrayWithOneElement(array);
+        if (array.length == 1) {
+            return 0;
+        }
+        double sum = 0;
+        double avg = Math.abs(calculateArithmeticAverage(array));
+        for (double element : array) {
+            if (Math.abs(element) < avg) {
+                sum += element;
+            }
+        }
+        return sum;
+    }
+
+    public static double calculateResultMultiplyingPositiveElementsInTheRightPlaces(double[] array) throws InvalidSizeOfArray {
+        ValidateArrayIncludingArrayWithOneElement(array);
+        double result = 1;
+        int count = 0;
+        for (int i = 1; i < array.length; i += 2) {
+            if (array[i] > 0) {
+                result *= array[i];
+                count++;
+            }
+        }
+        return count != 0 ? result : result - 1;
     }
 }
