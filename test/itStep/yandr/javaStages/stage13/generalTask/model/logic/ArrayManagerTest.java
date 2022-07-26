@@ -267,7 +267,6 @@ public class ArrayManagerTest {
         int i = 0;
         for (double[] array : arrays) {
             Assert.assertEquals(expected[i], calculateSumOfAbsoluteValuesAreLessThanAverage(array), 0.0001);
-            System.out.println(calculateArithmeticAverage(array));
             i++;
         }
     }

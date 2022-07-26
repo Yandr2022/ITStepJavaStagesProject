@@ -1,6 +1,8 @@
-package itStep.yandr.javaStages.stage12.task01.util;
+package itStep.yandr.javaStages.stage13.view;
 
 import java.util.Scanner;
+
+import static itStep.yandr.javaStages.stage13.view.Printer.printError;
 
 public class InputManager {
 
@@ -10,7 +12,7 @@ public class InputManager {
         if (scanner.hasNextInt()) {
             num = scanner.nextInt();
         } else {
-            System.err.println("Number not determined, try again");
+            printError("Number not determined, try again");
             num = getInt();
         }
         return num;
@@ -24,12 +26,22 @@ public class InputManager {
             char charValue = name.charAt(i);
 
             if (!Character.isLetter(charValue)) {
-                System.err.println("Letter not determined, try again");
+                printError("Letter not determined, try again");
                 name = getStringWithLetter();
             }
         }
         return name;
+    }
 
-
+    public static double getDouble() {
+        Scanner scanner = new Scanner(System.in);
+        double num;
+        if (scanner.hasNextDouble()) {
+            num = scanner.nextDouble();
+        } else {
+            printError("Number not determined, try again");
+            num = getDouble();
+        }
+        return num;
     }
 }

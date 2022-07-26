@@ -9,14 +9,13 @@ import itStep.yandr.javaStages.stage12.task01.util.MSGBuilder;
 import itStep.yandr.javaStages.stage12.task01.view.Printer;
 
 import java.io.IOException;
-import java.util.Scanner;
+
 
 public class Main {
 
     public static final String MSG_WRONG_DATA = "Entered data is not valid\n";
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Printer.print("Input the starting position of the chess piece\nNumber of the checkerboard row: ");
         int x1 = InputManager.getInt();
         Printer.print("Number of the checkerboard column: ");
@@ -47,17 +46,12 @@ public class Main {
                     throw new IOException();
             }
             Printer.print(msg);
-        } catch (SameCoordinatesException e) {
-            e.printStackTrace();
-        } catch (OutOfRangeValueException e) {
+        } catch (SameCoordinatesException | InvalidSizeOfArray | OutOfRangeValueException e) {
             e.printStackTrace();
         } catch (IOException e) {
             Printer.printError(MSG_WRONG_DATA);
             e.printStackTrace();
-        } catch (InvalidSizeOfArray e) {
-            e.printStackTrace();
         }
-        scanner.close();
     }
 
 }
