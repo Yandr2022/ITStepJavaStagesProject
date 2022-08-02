@@ -8,6 +8,7 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class ArrayManagerTest {
+    private final double[][] INVALID_ARRAYS = {null, new double[0], {6}};
 
     @Test
     public void testCheckOrderOfSequenceOfNumbersBasic() {
@@ -31,11 +32,10 @@ public class ArrayManagerTest {
 
     @Test
     public void testCheckOrderOfSequenceOfNumbersWithInvalidArray() {
-        double[][] arrays = {null, {}, {6}};
         int expected = -1;
-        for (int i = 0; i < arrays.length; i++) {
-            String error = "Error while checking an array: " + Arrays.toString(arrays[i]);
-           assertEquals(error, expected, ArrayManager.checkOrderOfSequenceOfNumbers(arrays[i]));
+        for (int i = 0; i < INVALID_ARRAYS.length; i++) {
+            String error = "Error while checking an array: " + Arrays.toString( INVALID_ARRAYS[i]);
+           assertEquals(error, expected, ArrayManager.checkOrderOfSequenceOfNumbers( INVALID_ARRAYS[i]));
         }
     }
 
@@ -74,14 +74,42 @@ public class ArrayManagerTest {
 
     @Test
     public void testCheckMirroredArrangementOfElementsWithInvalidArray() {
-        double[][] arrays = {null, {}, {6}};
-        for (double array[] : arrays) {
+        for (double array[] : INVALID_ARRAYS) {
             try {
                 ArrayManager.checkMirroredArrangementOfElements(array);
                 fail("The array with " + Arrays.toString(array) + "should have been thrown " +
                         "OutOfRangeValueException \n");
             } catch (InvalidSizeOfArray e) {
             }
+        }
+    }
+
+    @Test
+    public void testCheckEqualityOrDifferenceNumbersOfSequenceBasic() {
+        double[][] arrays = {{3, 3, 3, 3, 3, 3}, {56, 8.2, 4, 1.6, 0, -2, -5.89}, {6, 2, 5, 9, 6, 57, 4}};
+        int[] expected = {1, 2, 0};
+        for (int i = 0; i < expected.length; i++) {
+            String error = "Error while checking an array %d" + Arrays.toString(arrays[i]);
+            assertEquals(error, expected[i], ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(arrays[i]));
+        }
+    }
+
+    @Test
+    public void testCheckEqualityOrDifferenceNumbersOfSequenceWithTwoElements() {
+        double[][] arrays = {{-1, -1}, {56, 8.2}};
+        int[] expected = {1, 2};
+        for (int i = 0; i < expected.length; i++) {
+            String error = "Error while checking an array " + Arrays.toString(arrays[i]);
+            assertEquals(error, expected[i], ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(arrays[i]));
+        }
+    }
+
+    @Test
+    public void testCheckEqualityOrDifferenceNumbersOfSequenceWithInvalidArray() {
+        int expected = -1;
+        for (int i = 0; i < INVALID_ARRAYS.length; i++) {
+            String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS[i]);
+            assertEquals(error, expected, ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(INVALID_ARRAYS[i]));
         }
     }
 }
