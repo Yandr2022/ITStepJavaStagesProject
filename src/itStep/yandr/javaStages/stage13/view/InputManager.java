@@ -5,12 +5,12 @@ import java.util.Scanner;
 import static itStep.yandr.javaStages.stage13.view.Printer.printError;
 
 public class InputManager {
+    private static final Scanner SCAN = new Scanner(System.in);
 
     public static int getInt() {
-        Scanner scanner = new Scanner(System.in);
         int num;
-        if (scanner.hasNextInt()) {
-            num = scanner.nextInt();
+        if (SCAN.hasNextInt()) {
+            num = SCAN.nextInt();
         } else {
             printError("Number not determined, try again");
             num = getInt();
@@ -19,9 +19,7 @@ public class InputManager {
     }
 
     public static String getStringWithLetter() {
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.next();
-
+        String name = SCAN.next();
         for (int i = 0; i < name.length(); i++) {
             char charValue = name.charAt(i);
 
@@ -34,10 +32,9 @@ public class InputManager {
     }
 
     public static double getDouble() {
-        Scanner scanner = new Scanner(System.in);
         double num;
-        if (scanner.hasNextDouble()) {
-            num = scanner.nextDouble();
+        if (SCAN.hasNextDouble()) {
+            num = SCAN.nextDouble();
         } else {
             printError("Number not determined, try again");
             num = getDouble();

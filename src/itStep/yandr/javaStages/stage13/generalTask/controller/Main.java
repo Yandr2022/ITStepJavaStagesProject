@@ -1,26 +1,24 @@
 package itStep.yandr.javaStages.stage13.generalTask.controller;
 
-import itStep.yandr.javaStages.stage13.generalTask.exception.InvalidSizeOfArray;
-import itStep.yandr.javaStages.stage13.generalTask.util.ActionSelector;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.generalTask.model.logic.ActionSelector;
+import itStep.yandr.javaStages.stage13.util.ArrayInitializer;
 import itStep.yandr.javaStages.stage13.view.InputManager;
 import itStep.yandr.javaStages.stage13.view.Printer;
 
 import java.io.IOException;
 
-import static itStep.yandr.javaStages.stage13.generalTask.util.ActionSelector.*;
+import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ActionSelector.*;
 
 
 public class Main {
     public static final String MSG_WRONG_DATA = "Entered data is not valid\n";
 
     public static void main(String[] args)  {
-        Printer.print("Input the amount of elements in the sequence:\n ");
+        Printer.print("Input the amount of elements in the sequence: \n");
         int size = InputManager.getInt();
         double[] array = new double[size];
-        Printer.print("Input the number: \n");
-        for (int i = 0; i < array.length; i++) {
-            array[i] = InputManager.getDouble();
-        }
+        ArrayInitializer.userInit(array,"Input the numbers of sequence: \n");
         Printer.print(String.format(
                 "Commands:        Actions available " +
                         "\n%s  : %s\n%s  : %s\n%s  : %s\n%s : %s\n%s  : %s\n%s  : %s\n%s  : %s\n"
@@ -37,10 +35,8 @@ public class Main {
         Printer.print("Input the amount of commands to be executed: \n");
         size = InputManager.getInt();
         String[] commands = new String[size];
-        Printer.print("Input the commands: \n");
-        for (int i = 0; i < commands.length; i++) {
-            commands[i] = InputManager.getStringWithLetter();
-        }
+        ArrayInitializer.userInit(commands,"Input the commands: \n" );
+
         try {
             String result = ActionSelector.selectActions(array, commands);
             Printer.print(result);

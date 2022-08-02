@@ -1,12 +1,12 @@
-package itStep.yandr.javaStages.stage13.generalTask.util;
+package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.generalTask.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import static itStep.yandr.javaStages.stage13.generalTask.util.ActionSelector.selectActions;
+import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ActionSelector.selectActions;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 

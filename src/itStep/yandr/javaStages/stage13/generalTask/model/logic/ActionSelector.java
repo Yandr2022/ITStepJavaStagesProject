@@ -1,6 +1,6 @@
-package itStep.yandr.javaStages.stage13.generalTask.util;
+package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.generalTask.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
 
 import java.io.IOException;
 import java.util.Arrays;

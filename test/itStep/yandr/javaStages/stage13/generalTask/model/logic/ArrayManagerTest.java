@@ -1,6 +1,6 @@
 package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.generalTask.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ArrayManag
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class ArrayManagerTest {
+public class  ArrayManagerTest {
     private final double[][] INVALID_ARRAYS = {null, new double[0], {2.6}};
 
     @Test
