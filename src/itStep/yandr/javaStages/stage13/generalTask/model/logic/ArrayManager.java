@@ -1,23 +1,14 @@
 package itStep.yandr.javaStages.stage13.generalTask.model.logic;
+import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 
-import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 
 public class ArrayManager {
 
-    private static void ValidateArrayIncludingArrayWithOneElement(double[] array) throws InvalidSizeOfArray {
-        if (array == null || array.length < 2) {
-            throw new InvalidSizeOfArray();
-        }
-    }
 
-    private static void ValidateArrayExcludingArrayWithOneElement(double[] array) throws InvalidSizeOfArray {
-        if (array == null || array.length == 0) {
-            throw new InvalidSizeOfArray();
-        }
-    }
 
-    public static int findMaxValueIndex(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayIncludingArrayWithOneElement(array);
+    public static int findMaxValueIndex(double[] array) throws InvalidSizeOfArrayException {
+        validateArrayIncludingArrayWithOneElement(array);
         int max = 0;
         for (int i = 1; i < array.length; i++) {
             if (array[i] > array[max]) {
@@ -27,8 +18,8 @@ public class ArrayManager {
         return max;
     }
 
-    public static int findMinValueIndex(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayIncludingArrayWithOneElement(array);
+    public static int findMinValueIndex(double[] array) throws InvalidSizeOfArrayException {
+        validateArrayIncludingArrayWithOneElement(array);
         int min = 0;
         for (int i = 1; i < array.length; i++) {
             if (array[i] < array[min]) {
@@ -38,8 +29,8 @@ public class ArrayManager {
         return min;
     }
 
-    public static double calculateArithmeticAverage(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayExcludingArrayWithOneElement(array);
+    public static double calculateArithmeticAverage(double[] array) throws InvalidSizeOfArrayException {
+        validateArray(array);
         if (array.length == 1) {
             return array[0];
         }
@@ -50,8 +41,8 @@ public class ArrayManager {
         return sum / array.length;
     }
 
-    public static void swapMinMaxElements(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayIncludingArrayWithOneElement(array);
+    public static void swapMinMaxElements(double[] array) throws InvalidSizeOfArrayException {
+        validateArrayIncludingArrayWithOneElement(array);
         int minI = findMinValueIndex(array);
         int maxI = findMaxValueIndex(array);
         double temp = array[maxI];
@@ -59,8 +50,8 @@ public class ArrayManager {
         array[minI] = temp;
     }
 
-    public static double calculateSumOfAbsoluteValuesAreLessThanAverage(double[]array) throws InvalidSizeOfArray {
-        ValidateArrayExcludingArrayWithOneElement(array);
+    public static double calculateSumOfAbsoluteValuesAreLessThanAverage(double[]array) throws InvalidSizeOfArrayException {
+        validateArray(array);
         if (array.length == 1) {
             return 0;
         }
@@ -74,8 +65,8 @@ public class ArrayManager {
         return sum;
     }
 
-    public static double calculateResultMultiplyingPositiveElementsInTheRightPlaces(double[] array) throws InvalidSizeOfArray {
-        ValidateArrayIncludingArrayWithOneElement(array);
+    public static double calculateResultMultiplyingPositiveElementsInTheRightPlaces(double[] array) throws InvalidSizeOfArrayException {
+        validateArrayIncludingArrayWithOneElement(array);
         double result = 1;
         int count = 0;
         for (int i = 1; i < array.length; i += 2) {

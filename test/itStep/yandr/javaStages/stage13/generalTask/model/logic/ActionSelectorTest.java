@@ -1,62 +1,76 @@
 package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ActionSelector.selectActions;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class ActionSelectorTest {
 
     @Test
-    public void testSelectActionsWithAllOptionsWithSingleCommand() throws IOException, InvalidSizeOfArray {
+    public void testSelectActionsWithAllOptionsWithSingleCommand() throws IOException, InvalidSizeOfArrayException
+            , ArrayContainingIncorrectDataException {
         double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
-        String expected = "Minimum value in the entered sequence of numbers: -2.4\n" +
-                "Maximum value in the entered sequence of numbers: 24.0\n" +
-                "Arithmetic mean of the entered sequence of numbers: 6.285714285714286\n" +
-                "Result of exchanging extreme values of the entered sequence of numbers: [2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4]\n" +
-                "Sum of numbers whose absolute value is less than the arithmetic mean of the entered sequence of numbers" +
-                ": 5.299999999999999\n" +
-                "Product of positive numbers located at even places of the entered sequence of numbers: 42.4\n";
-        String actual = selectActions(array, "all");
-        assertEquals(expected, actual);
+        double [][] expected = {{-2.4},{24.0},{6.285714285714286},{5.299999999999999},{ 42.4}
+                , {2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4}};
+        double [][]actual = selectActions(array, "all");
+        assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void testSelectActionsUsingGroupOfCommands() throws IOException, InvalidSizeOfArray {
-        double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
-        String expected = "Sum of numbers whose absolute value is less than the arithmetic mean " +
-                "of the entered sequence of numbers: 5.299999999999999\n" +
-                "Result of exchanging extreme values of the entered sequence of numbers:" +
-                " [2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4]\n" +
-                "Minimum value in the entered sequence of numbers: -2.4\n" +
-                "Arithmetic mean of the entered sequence of numbers: 6.285714285714286\n" +
-                "Maximum value in the entered sequence of numbers: 24.0\n" +
-                "Product of positive numbers located at even places of the entered sequence of numbers: 42.4\n";
-        String actual = selectActions(array, "sum", "swap", "min", "avg", "max", "mpl");
-        assertEquals(expected, actual);
+    public void testSelectActionsWithAllOptionsWithSameCommands() throws IOException, InvalidSizeOfArrayException
+            , ArrayContainingIncorrectDataException {
+        double[] array = {2.4, 5.3, 0, 6.7, 8, 24};
+        double [][][] expected = {{{14.399999999999999},{14.399999999999999}},{{ 852.24}
+                , {2.4, 5.3, 24.0, 6.7, 8.0, 0.0},{35.51}}};
+        String [][]commands ={{"sum","sum"},{"mpl","swap","mpl"}};
+        for (int i = 0; i < commands.length; i++) {
+            double [][]actual = selectActions(array, commands[i]);
+            assertArrayEquals(expected[i], actual);
+        }
+
     }
 
     @Test
-    public void testSelectActionsWithNull() throws IOException, InvalidSizeOfArray {
-        double[][] arrays = {null, {0}, null};
-        String[][] commands = {{"all"}, {"swap", null}, null};
+    public void testSelectActionsUsingGroupOfCommands() throws IOException, InvalidSizeOfArrayException
+            , ArrayContainingIncorrectDataException {
+        double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
+        double [][] expected = {{5.299999999999999},
+                {2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4},{-2.4},{6.285714285714286},{24.0},{ 42.4}};
+        double[][] actual = selectActions(array, "sum", "swap", "min", "avg", "max", "mpl");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testSelectActionsWithNull() throws IOException, ArrayContainingIncorrectDataException {
+        double[][] arrays = {null , {1,2}};
+        String[][] commands = {{"all"}, null};
         for (int i = 0; i < commands.length; i++) {
             try {
                 selectActions(arrays[i], commands[i]);
                 fail("The arrays with " + Arrays.toString(arrays[i]) + Arrays.toString(commands[i]) +
                         " should have been thrown InvalidSizeOfArrayException ");
-            } catch (InvalidSizeOfArray e ) {
+            } catch (InvalidSizeOfArrayException  e ) {
             }
         }
     }
 
+    @Test(expected = ArrayContainingIncorrectDataException.class)
+    public void testSelectActionsWithNullWithinArray() throws IOException, InvalidSizeOfArrayException
+            , ArrayContainingIncorrectDataException {
+        double[] arrays = {0, 1};
+        String[] commands = {"swap", null};
+        selectActions(arrays, commands);
+    }
+
     @Test
-    public void testSelectActionsWithWrongCommand() throws InvalidSizeOfArray {
+    public void testSelectActionsWithWrongCommand() throws InvalidSizeOfArrayException
+            , ArrayContainingIncorrectDataException {
         double[] array = {1, 2};
         String[][] commands = {{"123"}, {""}, {"all","ghj"}};
         for (String command[]:commands) {
