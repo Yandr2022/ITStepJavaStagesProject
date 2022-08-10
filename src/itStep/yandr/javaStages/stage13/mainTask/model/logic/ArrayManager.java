@@ -1,8 +1,11 @@
 package itStep.yandr.javaStages.stage13.mainTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
+import itStep.yandr.javaStages.stage13.util.DataValidator;
 
 public class ArrayManager {
+
+
     private static boolean checkSequenceOfNumbersForAscending(double[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i] >= array[i + 1]) {
@@ -39,6 +42,8 @@ public class ArrayManager {
         return true;
     }
 
+
+
     public static int checkOrderOfSequenceOfNumbers(double[] array) {
         if (array == null || array.length < 2) {
             return -1;
@@ -53,10 +58,8 @@ public class ArrayManager {
         return result;
     }
 
-    public static boolean checkMirroredArrangementOfElements(double[] array) throws InvalidSizeOfArray {
-        if (array == null || array.length < 2) {
-            throw new InvalidSizeOfArray();
-        }
+    public static boolean checkMirroredArrangementOfElements(double[] array) throws InvalidSizeOfArrayException {
+        DataValidator.validateArrayIncludingArrayWithOneElement(array);
         for (int i = 0, half = array.length / 2; i < half; i++) {
             if (array[i] != array[array.length - 1 - i]) {
                 return false;
@@ -77,6 +80,32 @@ public class ArrayManager {
             result = checkDifferenceOfTheArrayElements(array) ? 2 : 0;
         }
         return result;
+    }
+
+    public static int defineTheNumberOfEvenElements(int[] array) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+        int count = 0;
+        for (int element : array) {
+            if (element % 2 == 0) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    public static int defineTheNumberOfOddElements(int[] array) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+        int count = 0;
+        for (int element : array) {
+            if (element % 2 != 0) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
 }

@@ -1,6 +1,6 @@
 package itStep.yandr.javaStages.stage13.mainTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArray;
+import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -8,7 +8,8 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public class ArrayManagerTest {
-    private final double[][] INVALID_ARRAYS = {null, new double[0], {6}};
+    private final double[][] INVALID_ARRAYS_DOUBLE = {null, new double[0], {6}};
+    private final int[][] INVALID_ARRAYS_INT = {null, new int[0], {6}};
 
     @Test
     public void testCheckOrderOfSequenceOfNumbersBasic() {
@@ -33,14 +34,14 @@ public class ArrayManagerTest {
     @Test
     public void testCheckOrderOfSequenceOfNumbersWithInvalidArray() {
         int expected = -1;
-        for (int i = 0; i < INVALID_ARRAYS.length; i++) {
-            String error = "Error while checking an array: " + Arrays.toString( INVALID_ARRAYS[i]);
-           assertEquals(error, expected, ArrayManager.checkOrderOfSequenceOfNumbers( INVALID_ARRAYS[i]));
+        for (double[] doubles : INVALID_ARRAYS_DOUBLE) {
+            String error = "Error while checking an array: " + Arrays.toString(doubles);
+            assertEquals(error, expected, ArrayManager.checkOrderOfSequenceOfNumbers(doubles));
         }
     }
 
     @Test
-    public void testCheckMirroredArrangementOfElementsReturnTrue() throws InvalidSizeOfArray {
+    public void testCheckMirroredArrangementOfElementsReturnTrue() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {2.5,7,0,9,9,0,7,2.5},{2.5,7,0,9,7,9,0,7,2.5}};
         for (double[]array:arrays) {
           assertTrue(ArrayManager.checkMirroredArrangementOfElements(array));
@@ -48,7 +49,7 @@ public class ArrayManagerTest {
     }
 
     @Test
-    public void testCheckMirroredArrangementOfElementsReturnFalse() throws InvalidSizeOfArray {
+    public void testCheckMirroredArrangementOfElementsReturnFalse() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {2.5,7,1,0,9,9,0,7,2.5},{2.5,7,1,0,9,7,9,0,7,2.5}};
         for (double[]array:arrays) {
             assertFalse(ArrayManager.checkMirroredArrangementOfElements(array));
@@ -56,7 +57,7 @@ public class ArrayManagerTest {
 
     }
     @Test
-    public void testCheckMirroredArrangementOfElementsWithTwoElements() throws InvalidSizeOfArray {
+    public void testCheckMirroredArrangementOfElementsWithTwoElements() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {7,2.5},{2.5,2.5}};
         boolean [] expected = {false,true};
         for (int i = 0;i< expected.length;i++) {
@@ -64,7 +65,7 @@ public class ArrayManagerTest {
         }
     }
     @Test
-    public void testCheckMirroredArrangementOfElementsWithThreeElements() throws InvalidSizeOfArray {
+    public void testCheckMirroredArrangementOfElementsWithThreeElements() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {7,2.5,7.6},{2.5,6,2.5}};
         boolean [] expected = {false,true};
         for (int i = 0;i< expected.length;i++) {
@@ -74,12 +75,12 @@ public class ArrayManagerTest {
 
     @Test
     public void testCheckMirroredArrangementOfElementsWithInvalidArray() {
-        for (double array[] : INVALID_ARRAYS) {
+        for (double array[] : INVALID_ARRAYS_DOUBLE) {
             try {
                 ArrayManager.checkMirroredArrangementOfElements(array);
                 fail("The array with " + Arrays.toString(array) + "should have been thrown " +
                         "OutOfRangeValueException \n");
-            } catch (InvalidSizeOfArray e) {
+            } catch (InvalidSizeOfArrayException e) {
             }
         }
     }
@@ -107,9 +108,63 @@ public class ArrayManagerTest {
     @Test
     public void testCheckEqualityOrDifferenceNumbersOfSequenceWithInvalidArray() {
         int expected = -1;
-        for (int i = 0; i < INVALID_ARRAYS.length; i++) {
-            String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS[i]);
-            assertEquals(error, expected, ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(INVALID_ARRAYS[i]));
+        for (double[] doubles : INVALID_ARRAYS_DOUBLE) {
+            String error = "Error while checking an array: " + Arrays.toString(doubles);
+            assertEquals(error, expected, ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(doubles));
+        }
+    }
+    @Test
+    public void testDefineTheNumberOfEvenElementsBasic() {
+        int[][]arrays = {{3,6,-8,5,7,5,0},{1,5,78,2,89,67,-1},{4,7,1,89,75,9},{5,7,9,13,17,35}};
+        int []expected ={3,2,1,0};
+        for (int i = 0; i < expected.length; i++) {
+            String error = "Error while checking an array" + Arrays.toString(arrays[i]);
+            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfEvenElements(arrays[i]));
+        }
+    }
+    @Test
+    public void testDefineTheNumberOfEvenElementsWithOneElements() {
+        int[][] arrays = {{-2}, {57}};
+        int[] expected = { 1, 0};
+        for (int i = 0; i < expected.length; i++) {
+            String error = "Error while checking an array " + Arrays.toString(arrays[i]);
+            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfEvenElements(arrays[i]));
+        }
+    }
+
+    @Test
+    public void testDefineTheNumberOfEvenElementsWithInvalidArray() {
+        int expected = -1;
+        for (int i = 0; i < INVALID_ARRAYS_INT.length - 1; i++) {
+            String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS_INT[i]);
+            assertEquals(error, expected, ArrayManager.defineTheNumberOfEvenElements(INVALID_ARRAYS_INT[i]));
+        }
+    }
+    @Test
+    public void testDefineTheNumberOfOddElementsBasic() {
+        int[][]arrays = {{3,6,-8,5,7,52,0},{10,5,78,2,89,70},{8,6,10,90,72,9},{54,0,96,18,20,34}};
+        int []expected ={3,2,1,0};
+        for (int i = 0; i < expected.length; i++) {
+            String error = "Error while checking an array" + Arrays.toString(arrays[i]);
+            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfOddElements(arrays[i]));
+        }
+    }
+    @Test
+    public void testDefineTheNumberOfOddElementsWithOneElements() {
+        int[][] arrays = {{-2}, {57}};
+        int[] expected = { 0,1};
+        for (int i = 0; i < expected.length; i++) {
+            String error = "Error while checking an array " + Arrays.toString(arrays[i]);
+            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfOddElements(arrays[i]));
+        }
+    }
+
+    @Test
+    public void testDefineTheNumberOfOddElementsWithInvalidArray() {
+        int expected = -1;
+        for (int i = 0; i < INVALID_ARRAYS_INT.length - 1; i++) {
+            String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS_INT[i]);
+            assertEquals(error, expected, ArrayManager.defineTheNumberOfOddElements(INVALID_ARRAYS_INT[i]));
         }
     }
 }
