@@ -1,10 +1,9 @@
 package itStep.yandr.javaStages.stage13.mainTask.controller;
 
-import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import itStep.yandr.javaStages.stage13.mainTask.model.logic.AcademicPerformanceAnalyzer;
 import itStep.yandr.javaStages.stage13.util.ArrayInitializer;
-import itStep.yandr.javaStages.stage13.util.InputManager;
 import itStep.yandr.javaStages.stage13.view.MsgBuilder;
 import itStep.yandr.javaStages.stage13.view.Printer;
 
@@ -27,7 +26,7 @@ public class Main {
             String msg = MsgBuilder.buildMsg("%",results,"fives","fours","triplets","deuces"
                     ,"units","zeros");
             Printer.print(msg);
-            } catch (InvalidSizeOfArrayException | ArrayContainingIncorrectDataException e) {
+            } catch (InvalidSizeOfArrayException | InvalidObjectException e) {
                 e.printStackTrace();
             }
 

@@ -1,6 +1,6 @@
 package itStep.yandr.javaStages.stage13.mainTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class AcademicPerformanceAnalyzerTest {
 
     @Test
     public void testCalculatePercentageOfMarksBasic() throws InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         int[][] results = {{5, 5, 1, 4, 3, 2, 1, 0, 3, 5, 3, 3}, {5, 5, 4, 3, 2, 1, 3, 5, 3, 3}};
         double[][] expected = {{25, 8.33, 33.33, 8.33, 16.66, 8.33}, {30, 10, 40, 10, 10, 0}};
         double[][] actual = {AcademicPerformanceAnalyzer.calculatePercentageOfMarks(results[0]), AcademicPerformanceAnalyzer.calculatePercentageOfMarks(results[1])};
@@ -27,7 +27,7 @@ public class AcademicPerformanceAnalyzerTest {
 
     @Test
     public void testCalculatePercentageOfMarksWithAllTheSameElements() throws InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         int[][] results = {{5, 5, 5, 5, 5}, {3, 3, 3, 3, 3}};
         double[][] expected = {{100, 0, 0, 0, 0, 0}, {0, 0, 100, 0, 0, 0}};
         double[][] actual = {AcademicPerformanceAnalyzer.calculatePercentageOfMarks(results[0])
@@ -41,7 +41,7 @@ public class AcademicPerformanceAnalyzerTest {
 
     @Test
     public void testCalculatePercentageOfMarksWithOneElement() throws InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         int[][] results = {{5}, {3}};
         double[][] expected = {{100, 0, 0, 0, 0, 0}, {0, 0, 100, 0, 0, 0}};
         double[][] actual = {AcademicPerformanceAnalyzer.calculatePercentageOfMarks(results[0])
@@ -54,7 +54,7 @@ public class AcademicPerformanceAnalyzerTest {
     }
 
     @Test
-    public void testCalculatePercentageOfMarksWithWrongArray() throws ArrayContainingIncorrectDataException {
+    public void testCalculatePercentageOfMarksWithWrongArray() throws InvalidObjectException {
         int[][] results = {null, new int[0]};
         for (int result[] : results) {
             try {
@@ -75,7 +75,7 @@ public class AcademicPerformanceAnalyzerTest {
                 AcademicPerformanceAnalyzer.calculatePercentageOfMarks(result);
                 fail("The array with " + Arrays.toString(result) + "should have been thrown " +
                         "ArrayContainingIncorrectDataException \n");
-            } catch (ArrayContainingIncorrectDataException e) {
+            } catch (InvalidObjectException e) {
             }
         }
 

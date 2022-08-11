@@ -2,8 +2,9 @@ package itStep.yandr.javaStages.stage13.util;
 
 import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 import static itStep.yandr.javaStages.stage13.util.InputManager.getInt;
+import static itStep.yandr.javaStages.stage13.util.InputManager.getStringWithLetter;
 
-import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import itStep.yandr.javaStages.stage13.view.Printer;
 
@@ -34,6 +35,7 @@ public class ArrayInitializer {
 
     public static void userInit(int[] array, String msg) throws InvalidSizeOfArrayException {
         validateArray(array);
+        msg = msg == null ? "Input element: " : msg;
         Printer.print(msg);
         for (int i = 0; i < array.length; i++) {
             array[i] = getInt();
@@ -42,6 +44,7 @@ public class ArrayInitializer {
 
     public static void userInit(double[] array, String msg) throws InvalidSizeOfArrayException {
         validateArray(array);
+        msg = msg == null ? "Input element: " : msg;
         Printer.print(msg);
         for (int i = 0; i < array.length; i++) {
             array[i] = InputManager.getDouble();
@@ -49,18 +52,20 @@ public class ArrayInitializer {
     }
 
     public static void userInit(String[] array, String msg) throws InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
-        validateArray(array);
+            , InvalidObjectException {
+        validateArrayWithObjectTypeElements(array);
+        msg = msg == null ? "Input element: " : msg;
         Printer.print(msg);
         for (int i = 0; i < array.length; i++) {
-            array[i] = InputManager.getStringWithLetter();
+            array[i] = getStringWithLetter();
         }
     }
 
     public static void fillArrayWithSelectTypeInit(int[] array) throws InvalidSizeOfArrayException {
+        validateArray(array);
         Printer.print("Would you like to enter a sequence of numbers manually or use automatic filling with random values?\n" +
                 "(Entered keyword: manually or automatic)\n");
-        String kw = InputManager.getStringWithLetter();
+        String kw = getStringWithLetter();
         if (kw.equals("manually")) {
             userInit(array, "Input numbers\n");
 
@@ -77,10 +82,11 @@ public class ArrayInitializer {
         }
     }
 
-    public static void fillArrayWithSelectTypeInit(double[] array) throws InvalidSizeOfArrayException {
+    public static void fillArrayWithSelectTypeInit(double[] array) throws InvalidSizeOfArrayException, InvalidObjectException {
+        validateArray(array);
         Printer.print("Would you like to enter a sequence of numbers manually or use automatic filling with random values?\n" +
                 "(Entered keyword: manually or automatic)\n");
-        String kw = InputManager.getStringWithLetter();
+        String kw = getStringWithLetter();
         if (kw.equals("manually")) {
             userInit(array, "Input numbers\n");
 
@@ -100,15 +106,42 @@ public class ArrayInitializer {
         Printer.print(String.format("Input the amount of %s: ", itemName));
         int num = getInt();
         if (num < 1) {
-           num= getSizeOfArray(itemName);
+            num = getSizeOfArray(itemName);
         }
         return num;
     }
 
-    public static int getIndexOfEqualsElement(String searchElement, String[] elements) {
+    public static int[] getIndicesOfEqualsElement(String searchElement, String[] elements) throws InvalidSizeOfArrayException
+            , InvalidObjectException {
+        validateArrayWithObjectTypeElements(elements);
+        validateObject(searchElement);
+//        if (searchElement == null) {
+//            Printer.print("the search element is not defined, please re-enter");
+//            searchElement = getStringWithLetter();
+//            getIndicesOfEqualsElement(searchElement, elements);
+//        }
+        int[] index = {-1};
+        for (int i = 0, j = 0; i < elements.length; i++) {
+            elements[i] = elements[i].toLowerCase();
+            if (elements[i].equals(searchElement.toLowerCase())) {
+                if (j > 0) {
+                    index = Arrays.copyOf(index, index.length + 1);
+                    index[j] = i;
+                }
+                index[j] = i;
+                j++;
+            }
+        }
+        return index;
+    }
+
+    public static int getIndexOfEqualsElement(String searchElement, String[] elements) throws InvalidSizeOfArrayException
+            , InvalidObjectException {
+        validateObject(searchElement);
+        validateArrayWithObjectTypeElements(elements);
         int index = -1;
         for (int i = 0; i < elements.length; i++) {
-            elements[i]=elements[i].toLowerCase();
+            elements[i] = elements[i].toLowerCase();
             if (elements[i].equals(searchElement.toLowerCase())) {
                 index = i;
             }
@@ -116,8 +149,10 @@ public class ArrayInitializer {
         return index;
     }
 
-    public static String[] concatenateArraysWithReplacementElement(String[] array1, String[] array2, int index) {
-        String[] result = new String[(array1.length-1) + array2.length];
+    public static String[] concatenateArraysWithReplacementElement(String[] array1, String[] array2, int index)
+            throws InvalidSizeOfArrayException, InvalidObjectException {
+        validateArrayWithObjectTypeElements(array1, array2);
+        String[] result = new String[(array1.length - 1) + array2.length];
         for (int i = 0; i < index; i++) {
             result[i] = array1[i];
         }
@@ -128,5 +163,17 @@ public class ArrayInitializer {
             result[i] = array1[j];
         }
         return result;
+    }
+
+    public static String[] exchangeAllEquals(String[] array, String equals, String... replacement) throws InvalidSizeOfArrayException
+            , InvalidObjectException {
+        validateObject(equals);
+        validateArrayWithObjectTypeElements(array, replacement);
+        int index = getIndexOfEqualsElement(equals, array);
+        if (index == -1) {
+            return array;
+        }
+        return exchangeAllEquals(concatenateArraysWithReplacementElement(array, Arrays.copyOfRange
+                (replacement, 0, replacement.length), index), equals, replacement);
     }
 }

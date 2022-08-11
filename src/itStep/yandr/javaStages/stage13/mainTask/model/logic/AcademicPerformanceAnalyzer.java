@@ -1,6 +1,6 @@
 package itStep.yandr.javaStages.stage13.mainTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 
 import static itStep.yandr.javaStages.stage13.util.DataValidator.validateArray;
@@ -10,10 +10,10 @@ public class AcademicPerformanceAnalyzer {
     public static final int[] MARKS = {5, 4, 3, 2, 1, 0};
 
     private static void validateMarksForComplianceWithTheScoringSystem(int[] marks)
-            throws ArrayContainingIncorrectDataException {
+            throws InvalidObjectException {
         for (int mark : marks) {
             if (mark > MARKS[0] || mark < MARKS[MARKS.length - 1]) {
-                throw new ArrayContainingIncorrectDataException();
+                throw new InvalidObjectException();
             }
         }
     }
@@ -38,7 +38,7 @@ public class AcademicPerformanceAnalyzer {
      * @return an array containing the percentage of grades in descending order from 5 to 0
      */
     public static double[] calculatePercentageOfMarks(int[] results) throws InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         validateArray(results);
         validateMarksForComplianceWithTheScoringSystem(results);
         double[] percentage = new double[MARKS.length];

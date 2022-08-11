@@ -1,20 +1,22 @@
 package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ActionSelector.selectActions;
+import static itStep.yandr.javaStages.stage13.util.ArrayInitializer.exchangeAllEquals;
 import static org.junit.Assert.*;
 
 public class ActionSelectorTest {
 
     @Test
     public void testSelectActionsWithAllOptionsWithSingleCommand() throws IOException, InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
         double [][] expected = {{-2.4},{24.0},{6.285714285714286},{5.299999999999999},{ 42.4}
                 , {2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4}};
@@ -24,7 +26,7 @@ public class ActionSelectorTest {
 
     @Test
     public void testSelectActionsWithAllOptionsWithSameCommands() throws IOException, InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         double[] array = {2.4, 5.3, 0, 6.7, 8, 24};
         double [][][] expected = {{{14.399999999999999},{14.399999999999999}},{{ 852.24}
                 , {2.4, 5.3, 24.0, 6.7, 8.0, 0.0},{35.51}}};
@@ -38,7 +40,7 @@ public class ActionSelectorTest {
 
     @Test
     public void testSelectActionsUsingGroupOfCommands() throws IOException, InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
         double [][] expected = {{5.299999999999999},
                 {2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4},{-2.4},{6.285714285714286},{24.0},{ 42.4}};
@@ -47,7 +49,7 @@ public class ActionSelectorTest {
     }
 
     @Test
-    public void testSelectActionsWithNull() throws IOException, ArrayContainingIncorrectDataException {
+    public void testSelectActionsWithNull() throws IOException, InvalidObjectException {
         double[][] arrays = {null , {1,2}};
         String[][] commands = {{"all"}, null};
         for (int i = 0; i < commands.length; i++) {
@@ -60,9 +62,9 @@ public class ActionSelectorTest {
         }
     }
 
-    @Test(expected = ArrayContainingIncorrectDataException.class)
+    @Test(expected = InvalidObjectException.class)
     public void testSelectActionsWithNullWithinArray() throws IOException, InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         double[] arrays = {0, 1};
         String[] commands = {"swap", null};
         selectActions(arrays, commands);
@@ -70,7 +72,7 @@ public class ActionSelectorTest {
 
     @Test
     public void testSelectActionsWithWrongCommand() throws InvalidSizeOfArrayException
-            , ArrayContainingIncorrectDataException {
+            , InvalidObjectException {
         double[] array = {1, 2};
         String[][] commands = {{"123"}, {""}, {"all","ghj"}};
         for (String command[]:commands) {
@@ -81,7 +83,23 @@ public class ActionSelectorTest {
             } catch ( IOException e) {
             }
         }
+    }
 
+    @Test
+    public void testExchangeAllEqualsBasic() throws InvalidSizeOfArrayException, InvalidObjectException {
+        String[] commands = {"all", "min"};
+        String[] exp = {"min", "max", "avg", "sum", "mpl", "swap", "min"};
+        String[] act = exchangeAllEquals(commands,commands[0],"min", "max", "avg", "sum", "mpl", "swap");
+        Assert.assertArrayEquals(exp, act);
+    }
+
+    @Test
+    public void testExchangeAllEqualsWithMultipleEquivalents() throws InvalidSizeOfArrayException
+            , InvalidObjectException {
+        String[] commands = {"all", "min","swap","all"};
+        String[] exp = {"min", "max", "avg", "sum", "mpl", "swap", "min","swap","min", "max", "avg", "sum", "mpl", "swap"};
+        String[] act = exchangeAllEquals(commands,commands[0],"min", "max", "avg", "sum", "mpl", "swap");
+        Assert.assertArrayEquals(exp, act);
     }
 }
 

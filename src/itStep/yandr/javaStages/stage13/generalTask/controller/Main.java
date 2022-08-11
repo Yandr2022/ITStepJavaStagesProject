@@ -1,6 +1,6 @@
 package itStep.yandr.javaStages.stage13.generalTask.controller;
 
-import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import itStep.yandr.javaStages.stage13.generalTask.model.logic.ActionSelector;
 import itStep.yandr.javaStages.stage13.util.ArrayInitializer;
@@ -28,7 +28,7 @@ public class Main {
             String[]descriptions=MsgBuilder.buildArrayOfDescriptionsByKeywords(commands,COMMAND_NAMES,DESCRIPTION_OF_METHODS);
             String msg = MsgBuilder.buildMsg(results,descriptions);
             Printer.print(msg);
-        } catch (InvalidSizeOfArrayException | ArrayContainingIncorrectDataException e) {
+        } catch (InvalidSizeOfArrayException | InvalidObjectException e) {
             e.printStackTrace();
         } catch (IOException e) {
             Printer.printError(MSG_WRONG_DATA);

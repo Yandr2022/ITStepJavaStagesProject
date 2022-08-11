@@ -1,11 +1,10 @@
 package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 
-import itStep.yandr.javaStages.stage13.exception.ArrayContainingIncorrectDataException;
+import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.*;
-import static itStep.yandr.javaStages.stage13.util.ArrayInitializer.concatenateArraysWithReplacementElement;
-import static itStep.yandr.javaStages.stage13.util.ArrayInitializer.getIndexOfEqualsElement;
+import static itStep.yandr.javaStages.stage13.util.ArrayInitializer.*;
 import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 
 import java.io.IOException;
@@ -15,17 +14,12 @@ import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ArrayManag
 
 public class ActionSelector {
 
-
-    public static double[][] selectActions(double[] array, String... commands) throws InvalidSizeOfArrayException, IOException
-            , ArrayContainingIncorrectDataException {
+    public static double[][] selectActions(double[] array, String... commands) throws InvalidSizeOfArrayException
+            , IOException, InvalidObjectException {
         validateArray(array);
-        validateArray(commands);
-        validateElementsOfArray(commands);
-        int index = getIndexOfEqualsElement(NAME_SELECT_ALL_ACTION, commands);
-        if (index != -1) {
-            commands = concatenateArraysWithReplacementElement(commands, Arrays.copyOfRange
-                            (COMMAND_NAMES, 0, COMMAND_NAMES.length - 1), index);
-        }
+        validateArrayWithObjectTypeElements(commands);
+        commands = exchangeAllEquals(commands,NAME_SELECT_ALL_ACTION
+                ,Arrays.copyOfRange(COMMAND_NAMES,0,COMMAND_NAMES.length-1));
         double[][] results = new double[commands.length][];
         for (int i = 0; i < commands.length; i++) {
             commands[i] = commands[i].toLowerCase();
@@ -49,8 +43,6 @@ public class ActionSelector {
                 case (NAME_MULTIPLYING_POSITIVE_NUMBERS_TO_RIGHT_PLACES):
                     results[i] = new double[]{calculateResultMultiplyingPositiveElementsInTheRightPlaces(array)};
                     break;
-//                case (NAME_SELECT_ALL_ACTION):
-//                    return selectActions(array, Arrays.copyOfRange(COMMAND_NAMES, 0, COMMAND_NAMES.length - 1));
                 default:
                     throw new IOException();
             }
