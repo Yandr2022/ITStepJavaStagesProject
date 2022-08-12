@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ArrayManager.*;
+import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ArrayLogic.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class  ArrayManagerTest {
+public class ArrayLogicTest {
     private final double[][] INVALID_ARRAYS = {null, new double[0], {2.6}};
 
     @Test

@@ -12,10 +12,20 @@ import java.util.Arrays;
 import java.util.Random;
 
 
-public class ArrayInitializer {
+public class ArrayManager {
     private static final Random RND = new Random();
     private static final int ROUNDING = 100;
-
+    private static final String DEFAULT_MSG = "Input elements:\n";
+    private static final String KEYWORD_USER_INIT = "manually";
+    private static final String KEYWORD_RANDOM_INIT = "automatic";
+    private static final String INITIAL_MSG_FOR_FILL_WITH_SELECT
+            = String.format("Would you like to enter a sequence of numbers manually or use automatic filling " +
+            "with random values?\n(Entered keyword: %s or %s )\n",KEYWORD_USER_INIT,KEYWORD_RANDOM_INIT);
+    private static final String INITIAL_MSG_FOR_USER_INIT ="Input numbers:\n" ;
+    private static final String[] INITIAL_MSG_FOR_RANDOM_INIT = {"Input min value: \n","Input max value: \n"} ;
+    private static final String MSG_INVALID_KEYWORD ="Key word not determined, try again \n" ;
+    private static final String DEFAULT_ELEMENT_NAME = "elements";
+    private static final String INITIAL_MSG_GET_SIZE ="Input the amount of " ;
 
     public static void randomInit(int[] array, int min, int max) throws InvalidSizeOfArrayException {
         validateArray(array);
@@ -35,7 +45,7 @@ public class ArrayInitializer {
 
     public static void userInit(int[] array, String msg) throws InvalidSizeOfArrayException {
         validateArray(array);
-        msg = msg == null ? "Input element: " : msg;
+        msg = msg == null ? DEFAULT_MSG : msg;
         Printer.print(msg);
         for (int i = 0; i < array.length; i++) {
             array[i] = getInt();
@@ -44,7 +54,7 @@ public class ArrayInitializer {
 
     public static void userInit(double[] array, String msg) throws InvalidSizeOfArrayException {
         validateArray(array);
-        msg = msg == null ? "Input element: " : msg;
+        msg = msg == null ? DEFAULT_MSG : msg;
         Printer.print(msg);
         for (int i = 0; i < array.length; i++) {
             array[i] = InputManager.getDouble();
@@ -53,8 +63,8 @@ public class ArrayInitializer {
 
     public static void userInit(String[] array, String msg) throws InvalidSizeOfArrayException
             , InvalidObjectException {
-        validateArrayWithObjectTypeElements(array);
-        msg = msg == null ? "Input element: " : msg;
+        validateArray(array);
+        msg = msg == null ? DEFAULT_MSG : msg;
         Printer.print(msg);
         for (int i = 0; i < array.length; i++) {
             array[i] = getStringWithLetter();
@@ -63,47 +73,45 @@ public class ArrayInitializer {
 
     public static void fillArrayWithSelectTypeInit(int[] array) throws InvalidSizeOfArrayException {
         validateArray(array);
-        Printer.print("Would you like to enter a sequence of numbers manually or use automatic filling with random values?\n" +
-                "(Entered keyword: manually or automatic)\n");
+        Printer.print(INITIAL_MSG_FOR_FILL_WITH_SELECT);
         String kw = getStringWithLetter();
-        if (kw.equals("manually")) {
-            userInit(array, "Input numbers\n");
+        if (kw.equals(KEYWORD_USER_INIT)) {
+            userInit(array, INITIAL_MSG_FOR_USER_INIT);
 
-        } else if (kw.equals("automatic")) {
-            Printer.print("Input min value: \n");
+        } else if (kw.equals(KEYWORD_RANDOM_INIT)) {
+            Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[0]);
             int min = getInt();
-            Printer.print("Input max value: \n");
+            Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[1]);
             int max = getInt();
             randomInit(array, min, max);
             Printer.print(Arrays.toString(array) + "\n");
         } else {
-            Printer.printError("Key word not determined, try again \n");
+            Printer.printError(MSG_INVALID_KEYWORD);
             fillArrayWithSelectTypeInit(array);
         }
     }
 
     public static void fillArrayWithSelectTypeInit(double[] array) throws InvalidSizeOfArrayException, InvalidObjectException {
         validateArray(array);
-        Printer.print("Would you like to enter a sequence of numbers manually or use automatic filling with random values?\n" +
-                "(Entered keyword: manually or automatic)\n");
+        Printer.print(INITIAL_MSG_FOR_FILL_WITH_SELECT);
         String kw = getStringWithLetter();
-        if (kw.equals("manually")) {
-            userInit(array, "Input numbers\n");
+        if (kw.equals(KEYWORD_USER_INIT)) {
+            userInit(array, INITIAL_MSG_FOR_USER_INIT);
 
-        } else if (kw.equals("automatic")) {
-            Printer.print("Input max value: \n");
+        } else if (kw.equals(KEYWORD_RANDOM_INIT)) {
+            Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[1]);
             double max = InputManager.getDouble();
             randomInit(array, max);
             Printer.print(Arrays.toString(array));
         } else {
-            Printer.printError("Key word not determined, try again \n");
+            Printer.printError(MSG_INVALID_KEYWORD);
             fillArrayWithSelectTypeInit(array);
         }
     }
 
     public static int getSizeOfArray(String itemName) {
-        itemName = itemName == null ? "elements" : itemName;
-        Printer.print(String.format("Input the amount of %s: ", itemName));
+        itemName = itemName == null ? DEFAULT_ELEMENT_NAME : itemName;
+        Printer.print(INITIAL_MSG_GET_SIZE + itemName);
         int num = getInt();
         if (num < 1) {
             num = getSizeOfArray(itemName);
@@ -113,8 +121,9 @@ public class ArrayInitializer {
 
     public static int[] getIndicesOfEqualsElement(String searchElement, String[] elements) throws InvalidSizeOfArrayException
             , InvalidObjectException {
-        validateArrayWithObjectTypeElements(elements);
         validateObject(searchElement);
+        validateArrayWithObjectTypeElements(elements);
+
 //        if (searchElement == null) {
 //            Printer.print("the search element is not defined, please re-enter");
 //            searchElement = getStringWithLetter();

@@ -3,7 +3,7 @@ package itStep.yandr.javaStages.stage13.mainTask.model.logic;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import itStep.yandr.javaStages.stage13.util.DataValidator;
 
-public class ArrayManager {
+public class ArrayLogic {
 
 
     private static boolean checkSequenceOfNumbersForAscending(double[] array) {

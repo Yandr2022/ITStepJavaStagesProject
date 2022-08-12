@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.COMMAND_NAMES;
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.NAME_SELECT_ALL_ACTION;
-import static itStep.yandr.javaStages.stage13.util.ArrayInitializer.*;
+import static itStep.yandr.javaStages.stage13.util.ArrayManager.*;
 import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 
 
@@ -45,9 +45,7 @@ public class MsgBuilder {
     public static String buildMsg(String[] keyWords, String... descriptions)
             throws InvalidSizeOfArrayException, InvalidObjectException {
         validateArray(keyWords);
-
         validateArray(descriptions);
-
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < keyWords.length; i++) {
             msg.append(keyWords[i]).append(" : ").append(descriptions[i] + "\n");
@@ -58,13 +56,8 @@ public class MsgBuilder {
     public static String[] buildArrayOfDescriptionsByKeywords(String[] usedKeywords, String[] allKeywords
             , String[] descriptions) throws InvalidSizeOfArrayException, InvalidObjectException {
         validateArrayWithObjectTypeElements(usedKeywords, allKeywords, descriptions);
-        int[] indices = getIndicesOfEqualsElement(NAME_SELECT_ALL_ACTION, usedKeywords);
-        for (int index : indices) {
-            if (index != -1) {
-                usedKeywords = concatenateArraysWithReplacementElement(usedKeywords, Arrays.copyOfRange
-                    (COMMAND_NAMES, 0, COMMAND_NAMES.length - 1), index);
-            }
-        }
+        usedKeywords = exchangeAllEquals(usedKeywords,NAME_SELECT_ALL_ACTION
+                ,Arrays.copyOfRange(COMMAND_NAMES,0,COMMAND_NAMES.length-1));
 
         String[] result = new String[usedKeywords.length];
         int  index ;

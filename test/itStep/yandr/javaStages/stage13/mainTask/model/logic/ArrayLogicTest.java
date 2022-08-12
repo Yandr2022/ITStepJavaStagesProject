@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class ArrayManagerTest {
+public class ArrayLogicTest {
     private final double[][] INVALID_ARRAYS_DOUBLE = {null, new double[0], {6}};
     private final int[][] INVALID_ARRAYS_INT = {null, new int[0], {6}};
 
@@ -17,7 +17,7 @@ public class ArrayManagerTest {
         int[] expected = {2, 1, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array %d" + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.checkOrderOfSequenceOfNumbers(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.checkOrderOfSequenceOfNumbers(arrays[i]));
         }
     }
 
@@ -27,7 +27,7 @@ public class ArrayManagerTest {
         int[] expected = {2, 1, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.checkOrderOfSequenceOfNumbers(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.checkOrderOfSequenceOfNumbers(arrays[i]));
         }
     }
 
@@ -36,7 +36,7 @@ public class ArrayManagerTest {
         int expected = -1;
         for (double[] doubles : INVALID_ARRAYS_DOUBLE) {
             String error = "Error while checking an array: " + Arrays.toString(doubles);
-            assertEquals(error, expected, ArrayManager.checkOrderOfSequenceOfNumbers(doubles));
+            assertEquals(error, expected, ArrayLogic.checkOrderOfSequenceOfNumbers(doubles));
         }
     }
 
@@ -44,7 +44,7 @@ public class ArrayManagerTest {
     public void testCheckMirroredArrangementOfElementsReturnTrue() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {2.5,7,0,9,9,0,7,2.5},{2.5,7,0,9,7,9,0,7,2.5}};
         for (double[]array:arrays) {
-          assertTrue(ArrayManager.checkMirroredArrangementOfElements(array));
+          assertTrue(ArrayLogic.checkMirroredArrangementOfElements(array));
         }
     }
 
@@ -52,7 +52,7 @@ public class ArrayManagerTest {
     public void testCheckMirroredArrangementOfElementsReturnFalse() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {2.5,7,1,0,9,9,0,7,2.5},{2.5,7,1,0,9,7,9,0,7,2.5}};
         for (double[]array:arrays) {
-            assertFalse(ArrayManager.checkMirroredArrangementOfElements(array));
+            assertFalse(ArrayLogic.checkMirroredArrangementOfElements(array));
         }
 
     }
@@ -61,7 +61,7 @@ public class ArrayManagerTest {
         double[][] arrays ={ {7,2.5},{2.5,2.5}};
         boolean [] expected = {false,true};
         for (int i = 0;i< expected.length;i++) {
-            assertEquals(expected[i],ArrayManager.checkMirroredArrangementOfElements(arrays[i]));
+            assertEquals(expected[i], ArrayLogic.checkMirroredArrangementOfElements(arrays[i]));
         }
     }
     @Test
@@ -69,7 +69,7 @@ public class ArrayManagerTest {
         double[][] arrays ={ {7,2.5,7.6},{2.5,6,2.5}};
         boolean [] expected = {false,true};
         for (int i = 0;i< expected.length;i++) {
-            assertEquals(expected[i],ArrayManager.checkMirroredArrangementOfElements(arrays[i]));
+            assertEquals(expected[i], ArrayLogic.checkMirroredArrangementOfElements(arrays[i]));
         }
     }
 
@@ -77,7 +77,7 @@ public class ArrayManagerTest {
     public void testCheckMirroredArrangementOfElementsWithInvalidArray() {
         for (double array[] : INVALID_ARRAYS_DOUBLE) {
             try {
-                ArrayManager.checkMirroredArrangementOfElements(array);
+                ArrayLogic.checkMirroredArrangementOfElements(array);
                 fail("The array with " + Arrays.toString(array) + "should have been thrown " +
                         "OutOfRangeValueException \n");
             } catch (InvalidSizeOfArrayException e) {
@@ -91,7 +91,7 @@ public class ArrayManagerTest {
         int[] expected = {1, 2, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array %d" + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.checkEqualityOrDifferenceNumbersOfSequence(arrays[i]));
         }
     }
 
@@ -101,7 +101,7 @@ public class ArrayManagerTest {
         int[] expected = {1, 2};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.checkEqualityOrDifferenceNumbersOfSequence(arrays[i]));
         }
     }
 
@@ -110,7 +110,7 @@ public class ArrayManagerTest {
         int expected = -1;
         for (double[] doubles : INVALID_ARRAYS_DOUBLE) {
             String error = "Error while checking an array: " + Arrays.toString(doubles);
-            assertEquals(error, expected, ArrayManager.checkEqualityOrDifferenceNumbersOfSequence(doubles));
+            assertEquals(error, expected, ArrayLogic.checkEqualityOrDifferenceNumbersOfSequence(doubles));
         }
     }
     @Test
@@ -119,7 +119,7 @@ public class ArrayManagerTest {
         int []expected ={3,2,1,0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array" + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfEvenElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfEvenElements(arrays[i]));
         }
     }
     @Test
@@ -128,7 +128,7 @@ public class ArrayManagerTest {
         int[] expected = { 1, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfEvenElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfEvenElements(arrays[i]));
         }
     }
 
@@ -137,7 +137,7 @@ public class ArrayManagerTest {
         int expected = -1;
         for (int i = 0; i < INVALID_ARRAYS_INT.length - 1; i++) {
             String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS_INT[i]);
-            assertEquals(error, expected, ArrayManager.defineTheNumberOfEvenElements(INVALID_ARRAYS_INT[i]));
+            assertEquals(error, expected, ArrayLogic.defineTheNumberOfEvenElements(INVALID_ARRAYS_INT[i]));
         }
     }
     @Test
@@ -146,7 +146,7 @@ public class ArrayManagerTest {
         int []expected ={3,2,1,0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array" + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfOddElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfOddElements(arrays[i]));
         }
     }
     @Test
@@ -155,7 +155,7 @@ public class ArrayManagerTest {
         int[] expected = { 0,1};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayManager.defineTheNumberOfOddElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfOddElements(arrays[i]));
         }
     }
 
@@ -164,7 +164,7 @@ public class ArrayManagerTest {
         int expected = -1;
         for (int i = 0; i < INVALID_ARRAYS_INT.length - 1; i++) {
             String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS_INT[i]);
-            assertEquals(error, expected, ArrayManager.defineTheNumberOfOddElements(INVALID_ARRAYS_INT[i]));
+            assertEquals(error, expected, ArrayLogic.defineTheNumberOfOddElements(INVALID_ARRAYS_INT[i]));
         }
     }
 }

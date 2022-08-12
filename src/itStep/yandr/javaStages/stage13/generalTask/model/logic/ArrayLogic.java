@@ -3,7 +3,7 @@ import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 
-public class ArrayManager {
+public class ArrayLogic {
 
 
 

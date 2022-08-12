@@ -2,14 +2,12 @@ package itStep.yandr.javaStages.stage13.generalTask.model.logic;
 
 import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ActionSelector.selectActions;
-import static itStep.yandr.javaStages.stage13.util.ArrayInitializer.exchangeAllEquals;
 import static org.junit.Assert.*;
 
 public class ActionSelectorTest {
@@ -25,7 +23,17 @@ public class ActionSelectorTest {
     }
 
     @Test
-    public void testSelectActionsWithAllOptionsWithSameCommands() throws IOException, InvalidSizeOfArrayException
+    public void testSelectActionsUsingGroupOfCommands() throws IOException, InvalidSizeOfArrayException
+            , InvalidObjectException {
+        double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
+        double [][] expected = {{5.299999999999999},
+                {2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4},{-2.4},{6.285714285714286},{24.0},{ 42.4}};
+        double[][] actual = selectActions(array, "sum", "swap", "min", "avg", "max", "mpl");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testSelectActionsWithSameCommands() throws IOException, InvalidSizeOfArrayException
             , InvalidObjectException {
         double[] array = {2.4, 5.3, 0, 6.7, 8, 24};
         double [][][] expected = {{{14.399999999999999},{14.399999999999999}},{{ 852.24}
@@ -38,15 +46,7 @@ public class ActionSelectorTest {
 
     }
 
-    @Test
-    public void testSelectActionsUsingGroupOfCommands() throws IOException, InvalidSizeOfArrayException
-            , InvalidObjectException {
-        double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
-        double [][] expected = {{5.299999999999999},
-                {2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4},{-2.4},{6.285714285714286},{24.0},{ 42.4}};
-        double[][] actual = selectActions(array, "sum", "swap", "min", "avg", "max", "mpl");
-        assertArrayEquals(expected, actual);
-    }
+
 
     @Test
     public void testSelectActionsWithNull() throws IOException, InvalidObjectException {
@@ -75,32 +75,17 @@ public class ActionSelectorTest {
             , InvalidObjectException {
         double[] array = {1, 2};
         String[][] commands = {{"123"}, {""}, {"all","ghj"}};
-        for (String command[]:commands) {
+        for (int i = 0;i<commands.length;i++) {
             try {
-                selectActions(array, command);
-                fail("The arrays with " + Arrays.toString(commands) +
+                selectActions(array, commands[i]);
+                fail("The arrays with " + Arrays.toString(commands[i]) +
                         " should have been thrown IOException");
             } catch ( IOException e) {
             }
         }
     }
 
-    @Test
-    public void testExchangeAllEqualsBasic() throws InvalidSizeOfArrayException, InvalidObjectException {
-        String[] commands = {"all", "min"};
-        String[] exp = {"min", "max", "avg", "sum", "mpl", "swap", "min"};
-        String[] act = exchangeAllEquals(commands,commands[0],"min", "max", "avg", "sum", "mpl", "swap");
-        Assert.assertArrayEquals(exp, act);
-    }
 
-    @Test
-    public void testExchangeAllEqualsWithMultipleEquivalents() throws InvalidSizeOfArrayException
-            , InvalidObjectException {
-        String[] commands = {"all", "min","swap","all"};
-        String[] exp = {"min", "max", "avg", "sum", "mpl", "swap", "min","swap","min", "max", "avg", "sum", "mpl", "swap"};
-        String[] act = exchangeAllEquals(commands,commands[0],"min", "max", "avg", "sum", "mpl", "swap");
-        Assert.assertArrayEquals(exp, act);
-    }
 }
 
 
