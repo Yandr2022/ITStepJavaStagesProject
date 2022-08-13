@@ -8,6 +8,7 @@ import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import itStep.yandr.javaStages.stage13.view.Printer;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -159,8 +160,11 @@ public class ArrayManager {
     }
 
     public static String[] concatenateArraysWithReplacementElement(String[] array1, String[] array2, int index)
-            throws InvalidSizeOfArrayException, InvalidObjectException {
+            throws InvalidSizeOfArrayException, InvalidObjectException, IOException {
         validateArrayWithObjectTypeElements(array1, array2);
+        if (index > array1.length-1||index<0) {
+            throw new IOException();
+        }
         String[] result = new String[(array1.length - 1) + array2.length];
         for (int i = 0; i < index; i++) {
             result[i] = array1[i];
@@ -175,7 +179,7 @@ public class ArrayManager {
     }
 
     public static String[] exchangeAllEquals(String[] array, String equals, String... replacement) throws InvalidSizeOfArrayException
-            , InvalidObjectException {
+            , InvalidObjectException, IOException {
         validateObject(equals);
         validateArrayWithObjectTypeElements(array, replacement);
         int index = getIndexOfEqualsElement(equals, array);

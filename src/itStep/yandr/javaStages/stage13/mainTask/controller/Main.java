@@ -11,14 +11,8 @@ import itStep.yandr.javaStages.stage13.view.Printer;
 
 public class Main {
     public static void main(String[] args) {
-//
-//        int size = ArrayInitializer.getSizeOfArray("numbers");
-//        double[] numbers = new double[size];
-//        ArrayInitializer.fillArrayWithSelectTypeInit(numbers);
         int[] array = new int[ArrayManager.getSizeOfArray("marks")];
         try {
-
-
 
         ArrayManager.fillArrayWithSelectTypeInit(array);
                 double [] results = AcademicPerformanceAnalyzer.calculatePercentageOfMarks(array);
@@ -29,10 +23,5 @@ public class Main {
             } catch (InvalidSizeOfArrayException | InvalidObjectException e) {
                 e.printStackTrace();
             }
-
-
-
-
-
     }
 }

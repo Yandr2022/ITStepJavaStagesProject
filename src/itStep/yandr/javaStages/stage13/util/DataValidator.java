@@ -49,5 +49,16 @@ public class DataValidator {
             DataValidator.validateObject(array);
         }
     }
+    public static void checkEquivalenceOfArraySizes(Object[] array,double[]...array2) throws InvalidSizeOfArrayException {
+            if (array.length != array2.length) {
+                throw new InvalidSizeOfArrayException();
+            }
+    }
+    public static void checkEquivalenceOfArraySizes(Object[] array,Object[] array2) throws InvalidSizeOfArrayException {
+            if (array.length != array2.length) {
+                throw new InvalidSizeOfArrayException();
+            }
+    }
+
     }
 

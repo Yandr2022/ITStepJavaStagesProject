@@ -4,6 +4,7 @@ import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.COMMAND_NAMES;
@@ -14,14 +15,11 @@ import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 
 public class MsgBuilder {
 
-
-
-
     public static String buildMsg(double[][] results, String... descriptions) throws InvalidSizeOfArrayException
             , InvalidObjectException {
         validateArray(results);
-        validateArray(descriptions);
-
+        validateArrayWithObjectTypeElements(descriptions);
+        checkEquivalenceOfArraySizes(descriptions,results);
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < results.length; i++) {
             msg.append(descriptions[i]).append(" : ").append(Arrays.toString(results[i]) + "\n");
@@ -33,8 +31,8 @@ public class MsgBuilder {
     public static String buildMsg(String complement, double[] results, String... descriptions)
             throws InvalidSizeOfArrayException, InvalidObjectException {
         validateArray(results);
-        validateArray(descriptions);
-
+        validateArrayWithObjectTypeElements(descriptions);
+        checkEquivalenceOfArraySizes(descriptions,results);
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < results.length; i++) {
             msg.append(descriptions[i]).append(" : ").append(String.format("%.3f %s\n", results[i], complement));
@@ -44,8 +42,8 @@ public class MsgBuilder {
 
     public static String buildMsg(String[] keyWords, String... descriptions)
             throws InvalidSizeOfArrayException, InvalidObjectException {
-        validateArray(keyWords);
-        validateArray(descriptions);
+        validateArrayWithObjectTypeElements(keyWords,descriptions);
+        checkEquivalenceOfArraySizes(descriptions,keyWords);
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < keyWords.length; i++) {
             msg.append(keyWords[i]).append(" : ").append(descriptions[i] + "\n");
@@ -54,11 +52,14 @@ public class MsgBuilder {
     }
 
     public static String[] buildArrayOfDescriptionsByKeywords(String[] usedKeywords, String[] allKeywords
-            , String[] descriptions) throws InvalidSizeOfArrayException, InvalidObjectException {
+            , String[] descriptions) throws InvalidSizeOfArrayException, InvalidObjectException, IOException {
         validateArrayWithObjectTypeElements(usedKeywords, allKeywords, descriptions);
         usedKeywords = exchangeAllEquals(usedKeywords,NAME_SELECT_ALL_ACTION
                 ,Arrays.copyOfRange(COMMAND_NAMES,0,COMMAND_NAMES.length-1));
-
+//        !!!replace with active foolproof
+        if (allKeywords.length > descriptions.length) {
+            throw new InvalidSizeOfArrayException();
+        }
         String[] result = new String[usedKeywords.length];
         int  index ;
         for (int i = 0; i < result.length; i++) {

@@ -5,14 +5,20 @@ import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.*;
 import static itStep.yandr.javaStages.stage13.view.MsgBuilder.buildArrayOfDescriptionsByKeywords;
 
 public class MsgBuilderTest {
+
     @Test
-    public void testBuildArrayOfDescriptionsByKeywordsBasic() throws InvalidObjectException, InvalidSizeOfArrayException {
+    public  void testBuildMsg(){
+        
+    }
+    @Test
+    public void testBuildArrayOfDescriptionsByKeywordsBasic() throws InvalidObjectException, InvalidSizeOfArrayException, IOException {
         String[][]usedCommands={{"1","2"},{"2","3"},{"3","1","2"}};
         String[]allCommands={"1","2","3"};
         String[]descriptions={"aaa","bbb","ccc"};
@@ -23,7 +29,7 @@ public class MsgBuilderTest {
     }
     @Test
     public void testBuildArrayOfDescriptionsByKeywordsWithTheSameUsedCommands()
-            throws InvalidObjectException, InvalidSizeOfArrayException {
+            throws InvalidObjectException, InvalidSizeOfArrayException, IOException {
         String[][]usedCommands={{"2","2"},{"1","2","1"},{"2","3","3"},{"1","3","1","2","1"}};
         String[]allCommands={"1","2","3"};
         String[]descriptions={"aaa","bbb","ccc"};
@@ -35,7 +41,7 @@ public class MsgBuilderTest {
 
     @Test
     public void testBuildArrayOfDescriptionsByKeywordsWithReplaceableUsedCommands()
-            throws InvalidObjectException, InvalidSizeOfArrayException {
+            throws InvalidObjectException, InvalidSizeOfArrayException, IOException {
         String[][]usedCommands={{"all","min"},{"swap","max","all"},{"avg","all","max"}};
         String[]allCommands= Arrays.copyOfRange(COMMAND_NAMES, 0, COMMAND_NAMES.length - 1);
         String[]descriptions= DESCRIPTION_OF_METHODS;
@@ -62,7 +68,7 @@ public class MsgBuilderTest {
 
     @Test
     public void testBuildArrayOfDescriptionsByKeywordsWithSameReplaceableUsedCommands()
-            throws InvalidObjectException, InvalidSizeOfArrayException {
+            throws InvalidObjectException, InvalidSizeOfArrayException, IOException {
         String[][] usedCommands = {{"all", "min", "all"},  {"all", "all", "max"}};
         String[] allCommands = Arrays.copyOfRange(COMMAND_NAMES, 0, COMMAND_NAMES.length - 1);
         String[] descriptions = DESCRIPTION_OF_METHODS;
