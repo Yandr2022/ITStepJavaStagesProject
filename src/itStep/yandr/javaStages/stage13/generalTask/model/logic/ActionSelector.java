@@ -34,6 +34,7 @@ public class ActionSelector {
                     results[i] = new double[]{calculateArithmeticAverage(array)};
                     break;
                 case (NAME_SWAP_EXTREME_VALUES):
+//                 !!! correct multiple call problem
                     swapMinMaxElements(array);
                     results[i] = array;
                     break;

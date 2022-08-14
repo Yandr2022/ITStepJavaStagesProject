@@ -18,7 +18,7 @@ public class MsgBuilder {
     public static String buildMsg(double[][] results, String... descriptions) throws InvalidSizeOfArrayException
             , InvalidObjectException {
         validateArray(results);
-        validateArrayWithObjectTypeElements(descriptions);
+        validateArrayWithObjectTypeElements(descriptions,results);
         checkEquivalenceOfArraySizes(descriptions,results);
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < results.length; i++) {
@@ -30,12 +30,13 @@ public class MsgBuilder {
 
     public static String buildMsg(String complement, double[] results, String... descriptions)
             throws InvalidSizeOfArrayException, InvalidObjectException {
+        validateObject(complement);
         validateArray(results);
         validateArrayWithObjectTypeElements(descriptions);
         checkEquivalenceOfArraySizes(descriptions,results);
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < results.length; i++) {
-            msg.append(descriptions[i]).append(" : ").append(String.format("%.3f %s\n", results[i], complement));
+            msg.append(descriptions[i]).append(" : ").append(String.format("%.2f %s\n", results[i], complement));
         }
         return msg + "";
     }
