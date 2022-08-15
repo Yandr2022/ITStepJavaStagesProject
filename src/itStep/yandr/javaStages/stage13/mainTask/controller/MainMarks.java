@@ -7,16 +7,15 @@ import itStep.yandr.javaStages.stage13.util.ArrayManager;
 import itStep.yandr.javaStages.stage13.view.MsgBuilder;
 import itStep.yandr.javaStages.stage13.view.Printer;
 
+import static itStep.yandr.javaStages.stage13.mainTask.model.logic.AcademicPerformanceAnalyzer.MARKS;
 
 
-public class Main {
+public class MainMarks {
     public static void main(String[] args) {
-        int[] array = new int[ArrayManager.getSizeOfArray("marks")];
+        int[] array = new int[ArrayManager.getSizeOfArray("marks: ")];
         try {
-
-        ArrayManager.fillArrayWithSelectTypeInit(array);
+        ArrayManager.fillArrayWithSelectTypeInitWithControllingBounds(array,MARKS[MARKS.length-1],MARKS[0]);
                 double [] results = AcademicPerformanceAnalyzer.calculatePercentageOfMarks(array);
-//                String []desc ={"fives","fours","triplets","deuces","units","zeros"};
             String msg = MsgBuilder.buildMsg("%",results,"fives","fours","triplets","deuces"
                     ,"units","zeros");
             Printer.print(msg);
