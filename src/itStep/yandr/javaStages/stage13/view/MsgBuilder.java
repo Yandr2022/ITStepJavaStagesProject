@@ -22,7 +22,7 @@ public class MsgBuilder {
         checkEquivalenceOfArraySizes(descriptions,results);
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < results.length; i++) {
-            msg.append(descriptions[i]).append(" : ").append(Arrays.toString(results[i]) + "\n");
+            msg.append(descriptions[i]).append(" : ").append(Arrays.toString(results[i])).append("\n");
         }
         return msg + "";
     }
@@ -47,7 +47,7 @@ public class MsgBuilder {
         checkEquivalenceOfArraySizes(descriptions,keyWords);
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < keyWords.length; i++) {
-            msg.append(keyWords[i]).append(" : ").append(descriptions[i] + "\n");
+            msg.append(keyWords[i]).append(" : ").append(descriptions[i]).append("\n");
         }
         return msg + "";
     }

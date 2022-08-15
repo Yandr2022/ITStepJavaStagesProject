@@ -75,12 +75,12 @@ public class ActionSelectorTest {
             , InvalidObjectException {
         double[] array = {1, 2};
         String[][] commands = {{"123"}, {""}, {"all","ghj"}};
-        for (int i = 0;i<commands.length;i++) {
+        for (String[] command : commands) {
             try {
-                selectActions(array, commands[i]);
-                fail("The arrays with " + Arrays.toString(commands[i]) +
+                selectActions(array, command);
+                fail("The arrays with " + Arrays.toString(command) +
                         " should have been thrown IOException");
-            } catch ( IOException e) {
+            } catch (IOException e) {
             }
         }
     }
