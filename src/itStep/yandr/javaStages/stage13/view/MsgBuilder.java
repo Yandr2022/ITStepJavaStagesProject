@@ -55,8 +55,6 @@ public class MsgBuilder {
     public static String[] buildArrayOfDescriptionsByKeywords(String[] usedKeywords, String[] allKeywords
             , String[] descriptions) throws InvalidSizeOfArrayException, InvalidObjectException, IOException {
         validateArrayWithObjectTypeElements(usedKeywords, allKeywords, descriptions);
-        usedKeywords = exchangeAllEquals(usedKeywords,NAME_SELECT_ALL_ACTION
-                ,Arrays.copyOfRange(COMMAND_NAMES,0,COMMAND_NAMES.length-1));
 //        !!!replace with active foolproof
         if (allKeywords.length > descriptions.length) {
             throw new InvalidSizeOfArrayException();

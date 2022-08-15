@@ -12,18 +12,9 @@ import static org.junit.Assert.*;
 
 public class ActionSelectorTest {
 
-    @Test
-    public void testSelectActionsWithAllOptionsWithSingleCommand() throws IOException, InvalidSizeOfArrayException
-            , InvalidObjectException {
-        double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
-        double [][] expected = {{-2.4},{24.0},{6.285714285714286},{5.299999999999999},{ 42.4}
-                , {2.4, 5.3, 24.0, 0.0, 6.7, 8.0, -2.4}};
-        double [][]actual = selectActions(array, "all");
-        assertArrayEquals(expected, actual);
-    }
 
     @Test
-    public void testSelectActionsUsingGroupOfCommands() throws IOException, InvalidSizeOfArrayException
+    public void testSelectActionsBasic() throws IOException, InvalidSizeOfArrayException
             , InvalidObjectException {
         double[] array = {2.4, 5.3, -2.4, 0, 6.7, 8, 24};
         double [][] expected = {{5.299999999999999},
@@ -46,12 +37,10 @@ public class ActionSelectorTest {
 
     }
 
-
-
     @Test
     public void testSelectActionsWithNull() throws IOException, InvalidObjectException {
         double[][] arrays = {null , {1,2}};
-        String[][] commands = {{"all"}, null};
+        String[][] commands = {{"mpl"}, null};
         for (int i = 0; i < commands.length; i++) {
             try {
                 selectActions(arrays[i], commands[i]);
@@ -74,7 +63,7 @@ public class ActionSelectorTest {
     public void testSelectActionsWithWrongCommand() throws InvalidSizeOfArrayException
             , InvalidObjectException {
         double[] array = {1, 2};
-        String[][] commands = {{"123"}, {""}, {"all","ghj"}};
+        String[][] commands = {{"123"}, {""}, {"mpl","ghj"}};
         for (String[] command : commands) {
             try {
                 selectActions(array, command);

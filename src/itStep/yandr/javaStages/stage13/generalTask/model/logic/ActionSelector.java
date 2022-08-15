@@ -18,8 +18,6 @@ public class ActionSelector {
             , IOException, InvalidObjectException {
         validateArray(array);
         validateArrayWithObjectTypeElements(commands);
-        commands = exchangeAllEquals(commands,NAME_SELECT_ALL_ACTION
-                ,Arrays.copyOfRange(COMMAND_NAMES,0,COMMAND_NAMES.length-1));
         double[][] results = new double[commands.length][];
         for (int i = 0; i < commands.length; i++) {
             commands[i] = commands[i].toLowerCase();

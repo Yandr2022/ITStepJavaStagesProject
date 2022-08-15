@@ -1,0 +1,287 @@
+1) What is a vector (mathematics)?
+-A vector is a set of elements that make up a vector space, also called a linear space
+
+2) What is an array?
+- An array is a container object that contains a fixed number of values of the same data type.
+Each element in an array is called an element, and each element is accessed by its numerical index. Numbering starts from 0.
+
+3) Why is it necessary to use arrays when designing and implementing a program?
+-The main reason for using arrays is that they allow you to store multiple elements and values under the same name.
+ You don't need to create different variables to store different values, and you can store them in indexes of the same object. This makes it easier to call up and manage values.
+
+4) What is the access time to array elements?
+-Using the index value, we can access the array elements in constant time.
+So the time complexity is O(1) to access an element in an array.
+
+5) Why does the array element numbering start from zero?
+-to optimize random access to array elements using the addressing formula a[i]_address = base_address + i * data_type_size,
+if the numbering of elements started from 1, an additional operation of subtracting 1 from the index would be required.
+
+6) What are the types of arrays in the Java language?
+-One-dimensional array - an array that contains sequentially arranged elements (of the same type)
+-Multidimensional Array -is a collection of arrays (an array of arrays), for example, a two-dimensional array is an array of one-dimensional arrays, a three-dimensional array is an array of two-dimensional arrays, and so on..
+
+7) How are Java arrays different from C/C++ and C# arrays?
+-A Java array is an object. It has a length element, and when it is accessed, automatic bounds checking is performed. As an object, it is always allocated on the heap, and is automatically garbage collected when deallocated.
+a. A Java array is aware of its size, but a C/C++ and C# array is not.
+b.Java detects and notifies the programmer when an array is indexed outside of , but C/C++ and C# is not.
+c.In C/C++ and C#, you can create an array of fully constructed objects in a single operation.Java requires several operations to create an array of objects.
+
+8) Describe basic and special properties of Java arrays
+-An array in the Java language is an object whose class is created at runtime, before the creation of the array object.
+-The memory for an array in the Java language is assigned dynamically using an operator called "new".
+- When an array is created, its size can be given by any integer in the range of the int type, or by an expression that evaluates to any integer in the range of the int type.
+Also, an array object can be created with zero length.
+-In Java, arrays are immutable, meaning they cannot be resized after they have been constructed.
+-An array can store both data of primitive types and reference types.
+-Array elements are accessed through their ordinal number - index , which indicates the corresponding position of the element within the array.
+ The index numbering of array elements starts from zero
+-Array bounds in the Java language are strictly controlled.
+-Since an array is an object, it additionally contains a read-only property - called "length", that stores the number of array elements.
+-In the Java language, it is possible to combine the declaration, construction, and initialization of an array in a single statement.
+-If the initialization of the array elements is done together with its declaration, then the construction can be omitted,
+leaving this action for the compiler
+
+9) Why do arrays have a special place in the Java language compared to other containers?
+Describe the main advantages and disadvantages of the Java array language compared to existing library containers:
+ efficiency, typing, and the ability to store primitive types.
+-Arrays are of particular importance among Java data containers, as they solve the problem of easily and quickly accessing and manipulating the members of groups of primitive data types,
+ that cannot be stored in contiguous memory locations if they exist as independent variables.Also an array in Java is especially lightweight when it comes to processing power.
+ An array in Java follows the principle of dynamic data allocation, which reduces the load on memory.
+Array VS Collections:
+a.Arrays have a fixed size, that is, once an array is created, we cannot increase or decrease it - Сollections are resizable.
+This means that it is possible to modify a collection after it has been created by adding, removing, or modifying elements of that collection.
+b.Arrays can hold only homogeneous data types elements - Collection can hold both homogeneous and and heterogeneous elements.
+c.Arrays do not have an underlying data structure, so 'out-of-the-box' method support is not available.
+-Each collection class is implemented based on some standard data structure, and therefore 'out-of-the-box' method support is available for each requirement,
+ which improves the performance of their use, because it is possible to use these methods directly.
+d.Arrays can hold both object and primitive.-Collection can hold only object types but not primitive datatypes.
+
+10) What are the notations in the Java language for declaring an array variable?
+-To declare an array in Java, use two notations:
+C:int array[];
+Java:int[] array;
+
+11) How to declare, construct and initialize arrays in Java?
+a.combination of declaration, construction and initialization of an array in one expression:
+int[] array = new int[] {1, 2, 3};
+int[] array = {1, 2, 3};
+b.Initialization of the array elements occurs separately from the array declaration (then construction cannot be skipped):
+int[] array;
+array = new int[] {1, 2, 3};
+
+12) If the array is an object, and all objects are created based on the described class,where are array classes stored in Java?
+-Since arrays are reference types (we can create them using the new keyword) these are also stored in heap area.
+
+13) How to pass an array as an input parameter to a method?
+-Arrays can be passed to other methods in the same way that primitive data type arguments are passed.
+To pass an array as an argument to a method, you simply need to pass the name of the array without the square brackets.
+The method prototype must match in order to accept an array type argument,i.e. accept an array, or VarArgs (Variable Arguments List)
+
+boolean[] results = SelectionChessPiecesLogic.checkMoveAllChessPiece(x1, y1, x2, y2);
+                    msg = MSGBuilder.buildMSGtoResultForAllChessPieces(results);
+
+14) How to return a value as an array from a method?
+-a. Method returning the array must have the return type as an array of the same data type as that of the array being returned.
+ The return type may be the usual Integer, Double, Character, String, or user-defined class objects as well.
+ b.When calling a method, the array of variables must be of the same data type as the array returned by the method
+
+    public static boolean[] checkMoveAllChessPiece( int x1, int y1, int x2, int y2) throws SameCoordinatesException
+            , OutOfRangeValueException {
+        boolean [] result = new boolean[AMOUNT_CHESS_PIECES] ;
+            result[0] = ChessPiecesLogic.checkRookMove(x1, y1, x2, y2);
+            result[1] = ChessPiecesLogic.checkKingMove(x1, y1, x2, y2);
+            result[2] = ChessPiecesLogic.checkBishopMove(x1, y1, x2, y2);
+            result[3] = ChessPiecesLogic.checkQueenMove(x1, y1, x2, y2);
+            result[4] = ChessPiecesLogic.checkKnightMove(x1, y1, x2, y2);
+        return result;
+    }
+                                       ********
+boolean[] results = SelectionChessPiecesLogic.checkMoveAllChessPiece(x1, y1, x2, y2);
+
+15) How to initialize the elements of a one-dimensional array during the declaration of a reference variable?
+int[] array = new int[] {1, 2, 3};
+int[] array = {1, 2, 3};
+
+16) How to initialize the elements of a one-dimensional array that is created "on the fly" as an anonymous object, or passed as a parameter to the called method, or returned as a result of the method?
+-Using the operator 'new', it is possible to initialize the entire array at the same time, by listing the elements corresponding to the data type specified during the declaration, in curly braces,
+boolean [] result;
+result = new boolean[] {true,false,true,false};
+or initialize each element separately, accessing by index
+   boolean [] result;
+        result = new boolean[5];
+            result[0] = true;
+            result[1] = false;
+            result[2] = false;
+            result[3] = false;
+            result[4] = false;
+
+17) What does the array really contain (store) inside itself?
+-A reference to an area of memory on the heap, that holds actual values (for primitive types) or object references for reference types
+Stack                                   Heap
+int
+array                        [0]    [1]   [2]    [3]     [4]
+[@4000]-------------------->[ 12 ] [ 15 ][ 18 ] [ 20 ] [ 35 ]
+i       @4000+i*int_size    @4000 |@4004 |@4008 |@4012 |@4016
+[0]
+
+18) What exceptions can occur, when working with arrays and what is it indicate?
+a.If the size of the array is a negative value, or if the given value is the result of executing an expression, then, at runtime, the JVM throws an exception NegativeArraySizeException
+b.If the index of an array element is out of range  or is negative, then the JVM throws an ArrayIndexOutOfBoundsException at runtime.
+
+19) How to use the improved for (foreach) loop that came with the JDK 5.0?
+-In Java, the for-each loop is used to iterate through elements of arrays and collections (like ArrayList).The for-each loop is preferred over the for loop, when working with arrays and collections, because it is easier to write and understand.
+
+char[] vowels = {'a', 'e', 'i', 'o', 'u'};                                  char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+
+   for (char element: vowels) {                                             for (int i = 0; i < vowels.length; ++ i) {
+    System.out.println(element);                                                System.out.println(vowels[i]);
+   }                                                                             }
+ }                                                                             }
+
+20) What can't be done with an array using the improved loop for in Java ?
+-It is not possible to change the state of an array using an extended loop 'for-each'. To do this, it is better to use the usual loop with a counter -'for'.
+
+21) What is the utility (service) class java.util.Arrays used for?
+-The ‘Arrays’ class is a member of the ‘java.util’ package. This is a part of the Java Collections framework and provides methods to create, access and manipulate Java arrays dynamically.
+All the methods provided by the Arrays class are static in nature and are methods of the ‘Object’ class. As the methods are static, they can be accessed using the class name itself.
+Method Name	                Prototype	                           Description
+
+asList	                      static< T> List<                           Returns a list(fixed-size) from specified array
+                             T>asList(Object[] a)
+
+                                    *******
+
+binarySearch      static int binarySearch (type[]a,type key)             This method uses a binary search algorithm.
+                             (+type fromIndex, type toIndex)             there are also various overloads of the binarySearch method.
+
+
+                                    *******
+
+copyOf          static type[]copyOf(type[] original, int newLength)      The method is used to copy the array with the specified length.
+                                                                           Truncates or appends nulls,zeros or false if necessary.
+                                    *******
+
+copyOfRange    static type[]copyOfRange(type[] original                  This method is used to copy a specified range in the array.
+                        , 'int from, int to')                                there are also various overloads of method.
+
+                                     *******
+
+deepEquals     static boolean deepEquals(Object[] a1, Object[] a2)	Checks if two specified arrays are deeply equal
+
+                                     *******
+
+deepHashCode	static intdeepHashCode(Object[] a)	                Returns a hash code of the specified array
+
+                                     *******
+
+deepToString	static StringdeepToString(Object[] a)	             Returns the "deep contents" of the specified array in a string
+
+                                     *******
+
+equals         static type equals(type[] a, type[] a2)                 Checks if two specified arrays are equal
+
+                                     *******
+
+fill           static void fill(type[] a, type val)                  Fills the array(all elements or in the given range) with the specified value.
+                             (+int fromIndex, int toIndex)              there are also various overloads of method.
+
+                                    *******
+
+sort         static void sort(type[] a)                              Sorts the array passed as a parameter to the method.All elements or in the given range
+           (+int fromIndex, int toIndex,Comparator< ? super T> c)    Sorting into ascending numerical order,  according to the natural ordering of its elements
+                                                                      or in the order specified by the comparator.According to the method overload
+
+                                    *******
+
+toString      static String toString(type[] a)                        This method returns the string representation of a given array.
+                                                                      Overloaded versions of the method are implemented for all data types, including user objects.
+
+                                    *******
+
+hashCode     static int hashCode(type[] a )                          This method returns the hashCode of the contents of the specified array.
+                                                                     Overloaded versions of the method are implemented for all data types, including user objects.
+
+22) What are the methods of copying (cloning) arrays (primitive and reference types)?
+
+a.Manual copying :
+       1. int intArray[] = {1,2,3};
+        int copyArray[] = new int[intArray.length];
+        copyArray = intArray;
+*when using the copyArray = intArray operator, a reference to the array is assigned. Therefore, it is not an actual copy, but a copy of the original array reference to the new array
+, i.e. the memory location of intArray is also shared by copyArray. But with this method, copyArray changes are also reflected in intArray
+      2.using 'for' loop
+         int intArray[] = {1,2,3};
+        int copyArray[] = new int[intArray.length];
+        for (int i=0; i<intArray.length; i++)
+           copyArray[i] = intArray[i];
+*Actually copying each element of the original array into a new array using a for loop,thus it is possible to create arrays independent of each other.
+
+b.Using System.arraycopy():
+This method makes a shallow copy of array elements.
+public static void arraycopy(
+    Object src_array=> Source array from where the contents are to be copied
+, int src_Pos => The position in the source array from where copying will start
+, Object dest_array => Destination array to which elements are to be copied
+, int dest_Pos => Starting position in the destination array for the elements to be copied
+, int length=> Length of the array to be copied )
+       char[] src_array = {'T','e','s','t','i','n','g'};
+       char[] dest_array = new char[7];
+       System.arraycopy(src_array, 0, dest_array, 0,7);
+
+c.Using Arrays.copyOf()(a part of the java.util package):
+The method Arrays.copyOf() internally makes use of the System.arraycopy () method,but this method creates a copy of the array provided in the first argument to the specified length
+, truncating or padding length zeros to the new array.
+public static int[] copyOf(
+int[] original_array => The array to be copied to the new array
+,int newLength => The length of the copied array to be returned)
+int[] src _Array = new int[] {1,2,3,4}
+   // {1,2,3,4,0}
+  int[] copy_Array = Arrays.copyOf(src_Array,5);
+
+d.Using  Arrays.copyOfRange():
+method is specifically used to make a partial copy of an array,truncates or appends zeros if necessary. Also internally uses the System.arraycopy() method.
+public static short[] copyOfRange(
+short[] original => The array from which a range is to be copied.
+, int from => Initial index of the range to be copied, inclusive
+, int to => The final index of the range to be copied, exclusive)
+ int intArray[] = { 10,20,30,40,50 };
+   //{30,40,50,0}
+   int[] copyArray = Arrays.copyOfRange(intArray, 2, 6);
+
+   //{50,0,0,0}
+    int[] copyArray1 = Arrays.copyOfRange(intArray, 4, intArray.length + 3);
+
+e. Using Object.clone():
+A Java array implements the Cloneable interface internally, so a Java array can be cloned. When cloning one-dimensional arrays, a deep copy of the array elements is created, which copies the values.
+But when cloning two-dimensional or multidimensional arrays, a shallow copy of the elements is created, i.e. only links are copied.
+
+    int src_Array[] = {5,10,15,20,25,30};
+     int clone_Array[] = src_Array.clone();
+      num_Array == clone_Array;//false
+      Arrays.equals(src_Array,clone_Array)//true,the values were copied, not the references,but with this method, clone_Array changes are also reflected in src_Array
+
+23) What is shallow and deep copying of objects?
+
+Shallow Copy:
+-Creating a new reference that points to the same memory location
+-It is fast as no new memory is allocated.
+-Changes in one entity is reflected in other entity.
+Cloned object and the original object are not disjoint.
+
+Deep Copy:
+-Creating a copy of object in a different memory location
+-It is slow as new memory is allocated
+-Changes in one entity are not reflected in changes in another identity
+-Cloned object and the original object are disjoint
+
+24) How to compare two arrays?
+Array.deepEquals(Object[], Object[])
+to compare actual array values:
+For one-dimensional arrays - using the method Arrays.equals(Object[], Object[])
+for multidimensional arrays - using the method Array.deepEquals(Object[], Object[])
+
+25) How to sort array elements?
+Sort array using Arrays.sort() method
+
+26) How to search for an element in an array?
