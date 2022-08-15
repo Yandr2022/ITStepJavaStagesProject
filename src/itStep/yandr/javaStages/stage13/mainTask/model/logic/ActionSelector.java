@@ -45,9 +45,6 @@ public class ActionSelector {
             case (NAME_COUNT_EVEN):
                 results[i] =String.valueOf(countTheNumberOfEvenElements(array));
                 break;
-            case (NAME_SELECT_ALL_ACTION):
-
-                break;
             default:
                 throw new IOException();
         }
