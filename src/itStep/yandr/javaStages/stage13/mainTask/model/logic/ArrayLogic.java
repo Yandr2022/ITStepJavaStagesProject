@@ -14,8 +14,24 @@ public class ArrayLogic {
         }
         return true;
     }
+    private static boolean checkSequenceOfNumbersForAscending(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] >= array[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private static boolean checkSequenceOfNumbersForDescending(double[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] <= array[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private static boolean checkSequenceOfNumbersForDescending(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i] <= array[i + 1]) {
                 return false;
@@ -41,6 +57,24 @@ public class ArrayLogic {
         }
         return true;
     }
+    private static boolean checkEqualityOfTheArrayElements(int[] array) {
+        for (int i = 1; i < array.length; i++) {
+            if (array[0]!= array[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private static boolean checkDifferenceOfTheArrayElements(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i]== array[j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 
 
@@ -51,14 +85,37 @@ public class ArrayLogic {
         int i = 0;
         int result = 0;
         if (array[i] < array[i + 1]) {
-            result = checkSequenceOfNumbersForAscending(array) ? 2 : 0;
+            result = checkSequenceOfNumbersForAscending(array) ? 1 : 0;
         } else if (array[i] > array[i + 1]) {
-            result = checkSequenceOfNumbersForDescending(array) ? 1 : 0;
+            result = checkSequenceOfNumbersForDescending(array) ? 2 : 0;
         }
         return result;
     }
 
-    public static boolean checkMirroredArrangementOfElements(double[] array) throws InvalidSizeOfArrayException {
+    public static int checkOrderOfSequenceOfNumbers(int[] array) {
+        if (array == null || array.length < 2) {
+            return -1;
+        }
+        int i = 0;
+        int result = 0;
+        if (array[i] < array[i + 1]) {
+            result = checkSequenceOfNumbersForAscending(array) ? 1 : 0;
+        } else if (array[i] > array[i + 1]) {
+            result = checkSequenceOfNumbersForDescending(array) ? 2 : 0;
+        }
+        return result;
+    }
+
+    public static boolean checkMirroredDispositionOfElements(double[] array) throws InvalidSizeOfArrayException {
+        DataValidator.validateArrayIncludingArrayWithOneElement(array);
+        for (int i = 0, half = array.length / 2; i < half; i++) {
+            if (array[i] != array[array.length - 1 - i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean checkMirroredDispositionOfElements(int[] array) throws InvalidSizeOfArrayException {
         DataValidator.validateArrayIncludingArrayWithOneElement(array);
         for (int i = 0, half = array.length / 2; i < half; i++) {
             if (array[i] != array[array.length - 1 - i]) {
@@ -81,8 +138,21 @@ public class ArrayLogic {
         }
         return result;
     }
+    public static int checkEqualityOrDifferenceNumbersOfSequence(int[] array) {
+        if (array == null || array.length < 2) {
+            return -1;
+        }
+        int i = 0;
+        int result;
+        if (array[i] == array[i + 1]) {
+            result = checkEqualityOfTheArrayElements(array) ? 1 : 0;
+        } else {
+            result = checkDifferenceOfTheArrayElements(array) ? 2 : 0;
+        }
+        return result;
+    }
 
-    public static int defineTheNumberOfEvenElements(int[] array) {
+    public static int countTheNumberOfEvenElements(int[] array) {
         if (array == null || array.length == 0) {
             return -1;
         }
@@ -95,7 +165,7 @@ public class ArrayLogic {
         return count;
     }
 
-    public static int defineTheNumberOfOddElements(int[] array) {
+    public static int countTheNumberOfOddElements(int[] array) {
         if (array == null || array.length == 0) {
             return -1;
         }

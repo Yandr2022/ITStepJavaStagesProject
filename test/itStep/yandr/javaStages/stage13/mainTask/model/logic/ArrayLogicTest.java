@@ -14,7 +14,7 @@ public class ArrayLogicTest {
     @Test
     public void testCheckOrderOfSequenceOfNumbersBasic() {
         double[][] arrays = {{-1, 3, 4, 7, 8, 12, 76.6}, {56, 8.2, 4, 1.6, 0, -2, -5.89}, {6, 2, 5, 9, 57, 4}};
-        int[] expected = {2, 1, 0};
+        int[] expected = {1, 2, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array %d" + Arrays.toString(arrays[i]);
             assertEquals(error, expected[i], ArrayLogic.checkOrderOfSequenceOfNumbers(arrays[i]));
@@ -24,7 +24,7 @@ public class ArrayLogicTest {
     @Test
     public void testCheckOrderOfSequenceOfNumbersWithTwoElements() {
         double[][] arrays = {{-1, 3}, {56, 8.2}, {6, 6}};
-        int[] expected = {2, 1, 0};
+        int[] expected = {1, 2, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
             assertEquals(error, expected[i], ArrayLogic.checkOrderOfSequenceOfNumbers(arrays[i]));
@@ -44,7 +44,7 @@ public class ArrayLogicTest {
     public void testCheckMirroredArrangementOfElementsReturnTrue() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {2.5,7,0,9,9,0,7,2.5},{2.5,7,0,9,7,9,0,7,2.5}};
         for (double[]array:arrays) {
-          assertTrue(ArrayLogic.checkMirroredArrangementOfElements(array));
+          assertTrue(ArrayLogic.checkMirroredDispositionOfElements(array));
         }
     }
 
@@ -52,7 +52,7 @@ public class ArrayLogicTest {
     public void testCheckMirroredArrangementOfElementsReturnFalse() throws InvalidSizeOfArrayException {
         double[][] arrays ={ {2.5,7,1,0,9,9,0,7,2.5},{2.5,7,1,0,9,7,9,0,7,2.5}};
         for (double[]array:arrays) {
-            assertFalse(ArrayLogic.checkMirroredArrangementOfElements(array));
+            assertFalse(ArrayLogic.checkMirroredDispositionOfElements(array));
         }
 
     }
@@ -61,7 +61,7 @@ public class ArrayLogicTest {
         double[][] arrays ={ {7,2.5},{2.5,2.5}};
         boolean [] expected = {false,true};
         for (int i = 0;i< expected.length;i++) {
-            assertEquals(expected[i], ArrayLogic.checkMirroredArrangementOfElements(arrays[i]));
+            assertEquals(expected[i], ArrayLogic.checkMirroredDispositionOfElements(arrays[i]));
         }
     }
     @Test
@@ -69,7 +69,7 @@ public class ArrayLogicTest {
         double[][] arrays ={ {7,2.5,7.6},{2.5,6,2.5}};
         boolean [] expected = {false,true};
         for (int i = 0;i< expected.length;i++) {
-            assertEquals(expected[i], ArrayLogic.checkMirroredArrangementOfElements(arrays[i]));
+            assertEquals(expected[i], ArrayLogic.checkMirroredDispositionOfElements(arrays[i]));
         }
     }
 
@@ -77,7 +77,7 @@ public class ArrayLogicTest {
     public void testCheckMirroredArrangementOfElementsWithInvalidArray() {
         for (double array[] : INVALID_ARRAYS_DOUBLE) {
             try {
-                ArrayLogic.checkMirroredArrangementOfElements(array);
+                ArrayLogic.checkMirroredDispositionOfElements(array);
                 fail("The array with " + Arrays.toString(array) + "should have been thrown " +
                         "OutOfRangeValueException \n");
             } catch (InvalidSizeOfArrayException e) {
@@ -119,7 +119,7 @@ public class ArrayLogicTest {
         int []expected ={3,2,1,0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array" + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfEvenElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.countTheNumberOfEvenElements(arrays[i]));
         }
     }
     @Test
@@ -128,7 +128,7 @@ public class ArrayLogicTest {
         int[] expected = { 1, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfEvenElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.countTheNumberOfEvenElements(arrays[i]));
         }
     }
 
@@ -137,7 +137,7 @@ public class ArrayLogicTest {
         int expected = -1;
         for (int i = 0; i < INVALID_ARRAYS_INT.length - 1; i++) {
             String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS_INT[i]);
-            assertEquals(error, expected, ArrayLogic.defineTheNumberOfEvenElements(INVALID_ARRAYS_INT[i]));
+            assertEquals(error, expected, ArrayLogic.countTheNumberOfEvenElements(INVALID_ARRAYS_INT[i]));
         }
     }
     @Test
@@ -146,7 +146,7 @@ public class ArrayLogicTest {
         int []expected ={3,2,1,0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array" + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfOddElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.countTheNumberOfOddElements(arrays[i]));
         }
     }
     @Test
@@ -155,7 +155,7 @@ public class ArrayLogicTest {
         int[] expected = { 0,1};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
-            assertEquals(error, expected[i], ArrayLogic.defineTheNumberOfOddElements(arrays[i]));
+            assertEquals(error, expected[i], ArrayLogic.countTheNumberOfOddElements(arrays[i]));
         }
     }
 
@@ -164,7 +164,7 @@ public class ArrayLogicTest {
         int expected = -1;
         for (int i = 0; i < INVALID_ARRAYS_INT.length - 1; i++) {
             String error = "Error while checking an array: " + Arrays.toString(INVALID_ARRAYS_INT[i]);
-            assertEquals(error, expected, ArrayLogic.defineTheNumberOfOddElements(INVALID_ARRAYS_INT[i]));
+            assertEquals(error, expected, ArrayLogic.countTheNumberOfOddElements(INVALID_ARRAYS_INT[i]));
         }
     }
 }
