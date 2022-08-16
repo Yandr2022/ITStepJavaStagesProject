@@ -385,13 +385,13 @@ public static void method(int... numbers) {
 29) How is the logic of methods that have a VarArgs parameter implemented?
 -Inside the method, this parameter is used as a one-dimensional array
 
-    public static void validateObject(Object... array) throws InvalidObjectException {
-            for (Object element : array) {
-                if (element == null) {
-                    throw new InvalidObjectException();
-                }
-            }
+    public static void validateArrayWithObjectTypeElements(Object[]... arrays) throws InvalidSizeOfArrayException
+            , InvalidObjectException {
+        for (Object[] array : arrays) {
+            DataValidator.validateArray(array);
+            DataValidator.validateObject(array);
         }
+    }
 
 30) What are the limitations when using VarArgs?
 -Only one VarArgs parameter can be declared in a method, and only the last one in the list of method parameters.
