@@ -315,6 +315,83 @@ For one-dimensional arrays - using the method Arrays.equals(Object[], Object[])
 for multidimensional arrays - using the method Array.deepEquals(Object[], Object[])
 
 25) How to sort array elements?
-Sort array using Arrays.sort() method
-
+- Sort array using Arrays.sort() method(native sorting)
+- Manually(custom sorting),for example:
+               int[] ar = {5, 3, 2, 8};
+               for (int i = ar.length - 1, temp; i > 0; i--) {
+                   if (ar[i] > ar[i - 1]) {
+                       temp = ar[i - 1];
+                       ar[i - 1] = ar[i];
+                       ar[i] = temp;
+                   }
+               }
 26) How to search for an element in an array?
+For unsorted arrays:
+-Manually:
+public static int getIndexOfSearchElement(int searchElement, int[] elements)  {
+        int index = -1;
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i]==searchElement) {
+                index = i;
+            }
+        }
+        return index;
+    }
+                 ******
+                     public static int[] getIndicesOfSearchElement(int searchElement, int[] elements) {
+                         int[] index = {-1};
+                         for (int i = 0, j = 0; i < elements.length; i++) {
+                             if (elements[i]==searchElement) {
+                                 if (j > 0) {
+                                     index = Arrays.copyOf(index, index.length + 1);
+                                     index[j] = i;
+                                 }
+                                 index[j] = i;
+                                 j++;
+                             }
+                         }
+                         return index;
+                     }
+For sorted arrays:
+-Using method Arrays.binarySearch()
+-Manually:
+    public static int binarySearch(int[] array, int searchValue) {
+        int a = 0;
+        int b = array.length - 1;
+        int middle;
+        while (a <= b) {
+            middle = (a + b) / 2;
+            if (searchValue == array[middle]) {
+                return middle;
+            } else if (searchValue < array[middle]) {
+                b = middle - 1;
+            } else {
+                a = middle + 1;
+            }
+        }
+        return -1;
+    }
+
+27) What is VarArgs and from which version of the Java language can it be used?
+-The VarArgs (Variable Arguments List) specifier is a list variable length arguments.Added to Java since JDK 5.0.
+
+28) How to declare a method with VarArgs?
+-Syntactically denoted by the ellipsis "...", which is written after the type of the corresponding parameter
+
+public static void method(int... numbers) {
+//////some code
+}
+
+29) How is the logic of methods that have a VarArgs parameter implemented?
+-Inside the method, this parameter is used as a one-dimensional array
+
+    public static void validateObject(Object... array) throws InvalidObjectException {
+            for (Object element : array) {
+                if (element == null) {
+                    throw new InvalidObjectException();
+                }
+            }
+        }
+
+30) What are the limitations when using VarArgs?
+-Only one VarArgs parameter can be declared in a method, and only the last one in the list of method parameters.
