@@ -7,8 +7,6 @@ import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.COMMAND_NAMES;
-import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.NAME_SELECT_ALL_ACTION;
 import static itStep.yandr.javaStages.stage13.util.ArrayManager.*;
 import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 

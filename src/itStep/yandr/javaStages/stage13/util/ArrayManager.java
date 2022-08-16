@@ -27,6 +27,7 @@ public class ArrayManager {
     private static final String MSG_INVALID_KEYWORD ="Key word not determined, try again \n" ;
     private static final String DEFAULT_ELEMENT_NAME = "elements";
     private static final String INITIAL_MSG_GET_SIZE ="Input the amount of " ;
+    private static final String ERROR_MSG_GET_SIZE ="%d is not correct value, try again\n " ;
 
     public static void randomInit(int[] array, int min, int max) throws InvalidSizeOfArrayException {
         validateArray(array);
@@ -84,7 +85,7 @@ public class ArrayManager {
           do {
               Printer.print(msg);
               array[i] = getInt();
-              msg = array[i]<boundMin||array[i]>boundMax?String.format("%d is not correct value, try again\n",array[i]):temp;
+              msg = array[i]<boundMin||array[i]>boundMax?String.format(ERROR_MSG_GET_SIZE,array[i]):temp;
           }while(array[i]<boundMin||array[i]>boundMax);
         }
     }
