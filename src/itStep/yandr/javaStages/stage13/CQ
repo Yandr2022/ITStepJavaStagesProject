@@ -63,23 +63,34 @@ C:int array[];
 Java:int[] array;
 
 11) How to declare, construct and initialize arrays in Java?
-a.combination of declaration, construction and initialization of an array in one expression:
+a.Combination of declaration, construction and initialization of an array in one expression:
 int[] array = new int[] {1, 2, 3};
 int[] array = {1, 2, 3};
 b.Initialization of the array elements occurs separately from the array declaration (then construction cannot be skipped):
 int[] array;
 array = new int[] {1, 2, 3};
+c.It`s also possible to combine the declaration and construction of an array and initialize it after:
+         int[] array = new int[2];
+                for (int j = 0; j <array.length ; j++) {
+                    array[i] = i;
+                }
+            }
 
 12) If the array is an object, and all objects are created based on the described class,where are array classes stored in Java?
 -Since arrays are reference types (we can create them using the new keyword) these are also stored in heap area.
 
 13) How to pass an array as an input parameter to a method?
 -Arrays can be passed to other methods in the same way that primitive data type arguments are passed.
-To pass an array as an argument to a method, you simply need to pass the name of the array without the square brackets.
+To pass an array as an argument to a method, you simply need to pass the name of the array without the square brackets, if it was created earlier
+, or pass the array as an anonymous object created "on the fly".
 The method prototype must match in order to accept an array type argument,i.e. accept an array, or VarArgs (Variable Arguments List)
 
 boolean[] results = SelectionChessPiecesLogic.checkMoveAllChessPiece(x1, y1, x2, y2);
                     msg = MSGBuilder.buildMSGtoResultForAllChessPieces(results);
+                                        *****
+                    msg = MSGBuilder.buildMSGtoResultForAllChessPieces(new boolean[0]);
+                                        *****
+                    msg = MSGBuilder.buildMSGtoResultForAllChessPieces(new boolean[]{true});
 
 14) How to return a value as an array from a method?
 -a. Method returning the array must have the return type as an array of the same data type as that of the array being returned.
@@ -96,8 +107,15 @@ boolean[] results = SelectionChessPiecesLogic.checkMoveAllChessPiece(x1, y1, x2,
             result[4] = ChessPiecesLogic.checkKnightMove(x1, y1, x2, y2);
         return result;
     }
-                                       ********
+
 boolean[] results = SelectionChessPiecesLogic.checkMoveAllChessPiece(x1, y1, x2, y2);
+                           ******
+               public static int[] getArray(int...values){
+                   return  Arrays.copyOfRange(values,0,values.length);
+                         }
+
+              int[]array = getArray(1,2,3);
+
 
 15) How to initialize the elements of a one-dimensional array during the declaration of a reference variable?
 int[] array = new int[] {1, 2, 3};
@@ -105,16 +123,14 @@ int[] array = {1, 2, 3};
 
 16) How to initialize the elements of a one-dimensional array that is created "on the fly" as an anonymous object, or passed as a parameter to the called method, or returned as a result of the method?
 -Using the operator 'new', it is possible to initialize the entire array at the same time, by listing the elements corresponding to the data type specified during the declaration, in curly braces,
-boolean [] result;
-result = new boolean[] {true,false,true,false};
-or initialize each element separately, accessing by index
-   boolean [] result;
-        result = new boolean[5];
-            result[0] = true;
-            result[1] = false;
-            result[2] = false;
-            result[3] = false;
-            result[4] = false;
+
+ new boolean[] {true,false,true,false};
+-Or initialize each element separately,using "for-each",but i don`t know where it can be applied:construction is syntactically correct
+,but it is not stored as a variable value, not suitable for an argument or method result.
+
+     for (int i:new int[5]) {
+            i =1;
+        }
 
 17) What does the array really contain (store) inside itself?
 -A reference to an area of memory on the heap, that holds actual values (for primitive types) or object references for reference types

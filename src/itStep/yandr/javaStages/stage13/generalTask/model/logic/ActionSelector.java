@@ -4,11 +4,9 @@ import itStep.yandr.javaStages.stage13.exception.InvalidObjectException;
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.DescriptionsContainer.*;
-import static itStep.yandr.javaStages.stage13.util.ArrayManager.*;
 import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ArrayLogic.*;
 
