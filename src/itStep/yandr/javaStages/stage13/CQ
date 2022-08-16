@@ -126,11 +126,13 @@ int[] array = {1, 2, 3};
 
  new boolean[] {true,false,true,false};
 -Or initialize each element separately,using "for-each",but i don`t know where it can be applied:construction is syntactically correct
-,but it is not stored as a variable value, not suitable for an argument or method result.
+,but it is not stored as a variable value, not suitable for an argument or method result.The same situation with the method Arrays.fill
 
      for (int i:new int[5]) {
             i =1;
         }
+        *****
+        Arrays.fill(new int[5],rnd.nextInt());
 
 17) What does the array really contain (store) inside itself?
 -A reference to an area of memory on the heap, that holds actual values (for primitive types) or object references for reference types
@@ -142,11 +144,14 @@ i       @4000+i*int_size    @4000 |@4004 |@4008 |@4012 |@4016
 [0]
 
 18) What exceptions can occur, when working with arrays and what is it indicate?
-a.If the size of the array is a negative value, or if the given value is the result of executing an expression, then, at runtime, the JVM throws an exception NegativeArraySizeException
+a.If the size of the array is a negative value, or if the given value is the result of executing an expression
+, then, at runtime, the JVM throws an exception NegativeArraySizeException.
 b.If the index of an array element is out of range  or is negative, then the JVM throws an ArrayIndexOutOfBoundsException at runtime.
 
 19) How to use the improved for (foreach) loop that came with the JDK 5.0?
--In Java, the for-each loop is used to iterate through elements of arrays and collections (like ArrayList).The for-each loop is preferred over the for loop, when working with arrays and collections, because it is easier to write and understand.
+-In Java, the for-each loop is used to iterate through elements of arrays and collections (like ArrayList)
+.The for-each loop is preferred over the for loop, when working with arrays and collections, because it is easier to write and understand.
+But not suitable for those situations where you need to use an index elements or to change the state of an array.
 
 char[] vowels = {'a', 'e', 'i', 'o', 'u'};                                  char[] vowels = {'a', 'e', 'i', 'o', 'u'};
 
@@ -154,7 +159,14 @@ char[] vowels = {'a', 'e', 'i', 'o', 'u'};                                  char
     System.out.println(element);                                                System.out.println(vowels[i]);
    }                                                                             }
  }                                                                             }
-
+                                              *****
+                                  char temp;
+                                  char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+                                  for (int i = 0,j=vowels.length -1; i < vowels.length/2;  i++,j--) {
+                                      temp=vowels[j];
+                                      vowels[j]=vowels[i];
+                                      vowels[i]=temp;
+                                  }
 20) What can't be done with an array using the improved loop for in Java ?
 -It is not possible to change the state of an array using an extended loop 'for-each'. To do this, it is better to use the usual loop with a counter -'for'.
 
@@ -222,8 +234,7 @@ hashCode     static int hashCode(type[] a )                          This method
 
 a.Manual copying :
        1. int intArray[] = {1,2,3};
-        int copyArray[] = new int[intArray.length];
-        copyArray = intArray;
+        int copyArray[] = intArray;
 *when using the copyArray = intArray operator, a reference to the array is assigned. Therefore, it is not an actual copy, but a copy of the original array reference to the new array
 , i.e. the memory location of intArray is also shared by copyArray. But with this method, copyArray changes are also reflected in intArray
       2.using 'for' loop
@@ -234,7 +245,7 @@ a.Manual copying :
 *Actually copying each element of the original array into a new array using a for loop,thus it is possible to create arrays independent of each other.
 
 b.Using System.arraycopy():
-This method makes a shallow copy of array elements.
+This method makes a deep copy of array elements.
 public static void arraycopy(
     Object src_array=> Source array from where the contents are to be copied
 , int src_Pos => The position in the source array from where copying will start
@@ -242,8 +253,8 @@ public static void arraycopy(
 , int dest_Pos => Starting position in the destination array for the elements to be copied
 , int length=> Length of the array to be copied )
        char[] src_array = {'T','e','s','t','i','n','g'};
-       char[] dest_array = new char[7];
-       System.arraycopy(src_array, 0, dest_array, 0,7);
+       char[] dest_array = new char[src_array.length];
+       System.arraycopy(src_array, 0, dest_array, 0,src_array.length);
 
 c.Using Arrays.copyOf()(a part of the java.util package):
 The method Arrays.copyOf() internally makes use of the System.arraycopy () method,but this method creates a copy of the array provided in the first argument to the specified length
@@ -253,7 +264,7 @@ int[] original_array => The array to be copied to the new array
 ,int newLength => The length of the copied array to be returned)
 int[] src _Array = new int[] {1,2,3,4}
    // {1,2,3,4,0}
-  int[] copy_Array = Arrays.copyOf(src_Array,5);
+  int[] copy_Array = Arrays.copyOf(src_Array,src_Array.length+1);
 
 d.Using  Arrays.copyOfRange():
 method is specifically used to make a partial copy of an array,truncates or appends zeros if necessary. Also internally uses the System.arraycopy() method.
@@ -263,7 +274,7 @@ short[] original => The array from which a range is to be copied.
 , int to => The final index of the range to be copied, exclusive)
  int intArray[] = { 10,20,30,40,50 };
    //{30,40,50,0}
-   int[] copyArray = Arrays.copyOfRange(intArray, 2, 6);
+   int[] copyArray = Arrays.copyOfRange(intArray, 2, intArray.length + 1);
 
    //{50,0,0,0}
     int[] copyArray1 = Arrays.copyOfRange(intArray, 4, intArray.length + 3);
@@ -275,7 +286,13 @@ But when cloning two-dimensional or multidimensional arrays, a shallow copy of t
     int src_Array[] = {5,10,15,20,25,30};
      int clone_Array[] = src_Array.clone();
       num_Array == clone_Array;//false
-      Arrays.equals(src_Array,clone_Array)//true,the values were copied, not the references,but with this method, clone_Array changes are also reflected in src_Array
+      Arrays.equals(src_Array,clone_Array)//true
+ //the values were copied, not the references
+                                *****
+                                     int src_Array[][] = {{5,10,15,20,25,30},{5,10,15,20,25,30}};
+                                        int clone_Array[][] = src_Array.clone();
+                                        boolean i = src_Array[0] == clone_Array[0];//true
+   //the references were copied,and with this method clone_Array changes are also reflected in src_Array
 
 23) What is shallow and deep copying of objects?
 
