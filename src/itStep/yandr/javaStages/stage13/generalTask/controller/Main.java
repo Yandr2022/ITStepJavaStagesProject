@@ -22,7 +22,7 @@ public class Main {
         double[] array = new double[getSizeOfArray("elements in the sequence: \n")];
         try {
             ArrayManager.fillArrayWithSelectTypeInit(array);
-            Printer.print("\nCommands:              Actions available\n " + MsgBuilder.buildMsg(COMMAND_NAMES
+            Printer.print("\nCommands:              Actions available\n" + MsgBuilder.buildMsg(COMMAND_NAMES
                     , DESCRIPTION_OF_METHODS));
             String[] commands = new String[getSizeOfArray("commands to be executed: \n")];
             ArrayManager.userInit(commands, "Input the commands: \n");
