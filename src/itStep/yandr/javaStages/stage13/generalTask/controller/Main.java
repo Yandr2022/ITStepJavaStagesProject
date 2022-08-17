@@ -19,7 +19,7 @@ public class Main {
     public static final String MSG_WRONG_DATA = "Entered data is not valid\n";
 
     public static void main(String[] args) {
-        double[] array = new double[getSizeOfArray("elements in the sequence")];
+        double[] array = new double[getSizeOfArray("elements in the sequence: \n")];
         try {
             ArrayManager.fillArrayWithSelectTypeInit(array);
             Printer.print("\nCommands:              Actions available\n " + MsgBuilder.buildMsg(COMMAND_NAMES
