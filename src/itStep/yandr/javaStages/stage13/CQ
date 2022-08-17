@@ -7,7 +7,8 @@ Each element in an array is called an element, and each element is accessed by i
 
 3) Why is it necessary to use arrays when designing and implementing a program?
 -The main reason for using arrays is that they allow you to store multiple elements and values under the same name.
- You don't need to create different variables to store different values, and you can store them in indexes of the same object. This makes it easier to call up and manage values.
+ You don't need to create different variables to store different values, and you can store them in indexes of the same object.
+  This makes it easier to call up and manage values.
 
 4) What is the access time to array elements?
 -Using the index value, we can access the array elements in constant time.
@@ -19,10 +20,12 @@ if the numbering of elements started from 1, an additional operation of subtract
 
 6) What are the types of arrays in the Java language?
 -One-dimensional array - an array that contains sequentially arranged elements (of the same type)
--Multidimensional Array -is a collection of arrays (an array of arrays), for example, a two-dimensional array is an array of one-dimensional arrays, a three-dimensional array is an array of two-dimensional arrays, and so on..
+-Multidimensional Array -is a collection of arrays (an array of arrays), for example, a two-dimensional array is an array of one-dimensional arrays
+, a three-dimensional array is an array of two-dimensional arrays, and so on..
 
 7) How are Java arrays different from C/C++ and C# arrays?
--A Java array is an object. It has a length element, and when it is accessed, automatic bounds checking is performed. As an object, it is always allocated on the heap, and is automatically garbage collected when deallocated.
+-A Java array is an object. It has a length element, and when it is accessed, automatic bounds checking is performed. As an object, it is always allocated on the heap
+, and is automatically garbage collected when deallocated.
 a. A Java array is aware of its size, but a C/C++ and C# array is not.
 b.Java detects and notifies the programmer when an array is indexed outside of , but C/C++ and C# is not.
 c.In C/C++ and C#, you can create an array of fully constructed objects in a single operation.Java requires several operations to create an array of objects.
@@ -45,8 +48,9 @@ leaving this action for the compiler
 9) Why do arrays have a special place in the Java language compared to other containers?
 Describe the main advantages and disadvantages of the Java array language compared to existing library containers:
  efficiency, typing, and the ability to store primitive types.
--Arrays are of particular importance among Java data containers, as they solve the problem of easily and quickly accessing and manipulating the members of groups of primitive data types,
- that cannot be stored in contiguous memory locations if they exist as independent variables.Also an array in Java is especially lightweight when it comes to processing power.
+-Arrays are of particular importance among Java data containers, as they solve the problem of easily and quickly accessing and manipulating the members of groups
+of primitive data types, that cannot be stored in contiguous memory locations if they exist as independent variables.
+Also an array in Java is especially lightweight when it comes to processing power.
  An array in Java follows the principle of dynamic data allocation, which reduces the load on memory.
 Array VS Collections:
 a.Arrays have a fixed size, that is, once an array is created, we cannot increase or decrease it - Сollections are resizable.
@@ -121,8 +125,10 @@ boolean[] results = SelectionChessPiecesLogic.checkMoveAllChessPiece(x1, y1, x2,
 int[] array = new int[] {1, 2, 3};
 int[] array = {1, 2, 3};
 
-16) How to initialize the elements of a one-dimensional array that is created "on the fly" as an anonymous object, or passed as a parameter to the called method, or returned as a result of the method?
--Using the operator 'new', it is possible to initialize the entire array at the same time, by listing the elements corresponding to the data type specified during the declaration, in curly braces,
+16) How to initialize the elements of a one-dimensional array that is created "on the fly" as an anonymous object, or passed as a parameter to the called method,
+or returned as a result of the method?
+-Using the operator 'new', it is possible to initialize the entire array at the same time, by listing the elements corresponding to the data type specified during
+the declaration, in curly braces.
 
  new boolean[] {true,false,true,false};
 -Or initialize each element separately,using "for-each",but i don`t know where it can be applied:construction is syntactically correct
@@ -171,8 +177,9 @@ char[] vowels = {'a', 'e', 'i', 'o', 'u'};                                  char
 -It is not possible to change the state of an array using an extended loop 'for-each'. To do this, it is better to use the usual loop with a counter -'for'.
 
 21) What is the utility (service) class java.util.Arrays used for?
--The ‘Arrays’ class is a member of the ‘java.util’ package. This is a part of the Java Collections framework and provides methods to create, access and manipulate Java arrays dynamically.
-All the methods provided by the Arrays class are static in nature and are methods of the ‘Object’ class. As the methods are static, they can be accessed using the class name itself.
+-The ‘Arrays’ class is a member of the ‘java.util’ package. This is a part of the Java Collections framework and provides methods to create,
+ access and manipulate Java arrays dynamically.All the methods provided by the Arrays class are static in nature and are methods of the ‘Object’ class.
+As the methods are static, they can be accessed using the class name itself.
 Method Name	                Prototype	                           Description
 
 asList	                      static< T> List<                           Returns a list(fixed-size) from specified array
@@ -257,8 +264,8 @@ public static void arraycopy(
        System.arraycopy(src_array, 0, dest_array, 0,src_array.length);
 
 c.Using Arrays.copyOf()(a part of the java.util package):
-The method Arrays.copyOf() internally makes use of the System.arraycopy () method,but this method creates a copy of the array provided in the first argument to the specified length
-, truncating or padding length zeros to the new array.
+The method Arrays.copyOf() internally makes use of the System.arraycopy () method,but this method creates a copy of the array provided in the first argument
+to the specified length, truncating or padding length zeros to the new array.
 public static int[] copyOf(
 int[] original_array => The array to be copied to the new array
 ,int newLength => The length of the copied array to be returned)
@@ -280,8 +287,8 @@ short[] original => The array from which a range is to be copied.
     int[] copyArray1 = Arrays.copyOfRange(intArray, 4, intArray.length + 3);
 
 e. Using Object.clone():
-A Java array implements the Cloneable interface internally, so a Java array can be cloned. When cloning one-dimensional arrays, a deep copy of the array elements is created, which copies the values.
-But when cloning two-dimensional or multidimensional arrays, a shallow copy of the elements is created, i.e. only links are copied.
+A Java array implements the Cloneable interface internally, so a Java array can be cloned. When cloning one-dimensional arrays, a deep copy of the array elements is created,
+ which copies the values.But when cloning two-dimensional or multidimensional arrays, a shallow copy of the elements is created, i.e. only links are copied.
 
     int src_Array[] = {5,10,15,20,25,30};
      int clone_Array[] = src_Array.clone();

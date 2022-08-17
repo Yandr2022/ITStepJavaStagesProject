@@ -21,13 +21,13 @@ public class ArrayManager {
     private static final String KEYWORD_RANDOM_INIT = "automatic";
     private static final String INITIAL_MSG_FOR_FILL_WITH_SELECT
             = String.format("Would you like to enter a sequence of numbers manually or use automatic filling " +
-            "with random values?\n(Entered keyword: %s or %s )\n",KEYWORD_USER_INIT,KEYWORD_RANDOM_INIT);
-    private static final String INITIAL_MSG_FOR_USER_INIT ="Input numbers:\n" ;
-    private static final String[] INITIAL_MSG_FOR_RANDOM_INIT = {"Input min value: \n","Input max value: \n"} ;
-    private static final String MSG_INVALID_KEYWORD ="Key word not determined, try again \n" ;
+            "with random values?\n(Entered keyword: %s or %s )\n", KEYWORD_USER_INIT, KEYWORD_RANDOM_INIT);
+    private static final String INITIAL_MSG_FOR_USER_INIT = "Input numbers:\n";
+    private static final String[] INITIAL_MSG_FOR_RANDOM_INIT = {"Input min value: \n", "Input max value: \n"};
+    private static final String MSG_INVALID_KEYWORD = "Key word not determined, try again \n";
     private static final String DEFAULT_ELEMENT_NAME = "elements";
-    private static final String INITIAL_MSG_GET_SIZE ="Input the amount of " ;
-    private static final String ERROR_MSG_GET_SIZE ="%d is not correct value, try again\n " ;
+    private static final String INITIAL_MSG_GET_SIZE = "Input the amount of ";
+    private static final String ERROR_MSG_GET_SIZE = "%d is not correct value, try again\n ";
 
     public static void randomInit(int[] array, int min, int max) throws InvalidSizeOfArrayException {
         validateArray(array);
@@ -77,16 +77,17 @@ public class ArrayManager {
             array[i] = getStringWithLetter();
         }
     }
-    public static void userInitWithControllingBounds(int[] array, String msg,int boundMin,int boundMax) throws InvalidSizeOfArrayException {
+
+    public static void userInitWithControllingBounds(int[] array, String msg, int boundMin, int boundMax) throws InvalidSizeOfArrayException {
         validateArray(array);
         msg = msg == null ? DEFAULT_MSG : msg;
-        String temp =msg;
+        String temp = msg;
         for (int i = 0; i < array.length; i++) {
-          do {
-              Printer.print(msg);
-              array[i] = getInt();
-              msg = array[i]<boundMin||array[i]>boundMax?String.format(ERROR_MSG_GET_SIZE,array[i]):temp;
-          }while(array[i]<boundMin||array[i]>boundMax);
+            do {
+                Printer.print(msg);
+                array[i] = getInt();
+                msg = array[i] < boundMin || array[i] > boundMax ? String.format(ERROR_MSG_GET_SIZE, array[i]) : temp;
+            } while (array[i] < boundMin || array[i] > boundMax);
         }
     }
 
@@ -109,30 +110,31 @@ public class ArrayManager {
             fillArrayWithSelectTypeInit(array);
         }
     }
+
     public static void fillArrayWithSelectTypeInitWithControllingBounds(int[] array, int boundMin, int boundMax)
             throws InvalidSizeOfArrayException {
         validateArray(array);
         Printer.print(INITIAL_MSG_FOR_FILL_WITH_SELECT);
         String kw = getStringWithLetter();
         if (kw.equals(KEYWORD_USER_INIT)) {
-            userInitWithControllingBounds(array, INITIAL_MSG_FOR_USER_INIT,boundMin,boundMax);
+            userInitWithControllingBounds(array, INITIAL_MSG_FOR_USER_INIT, boundMin, boundMax);
             Printer.print(Arrays.toString(array) + "\n");
         } else if (kw.equals(KEYWORD_RANDOM_INIT)) {
             int min;
             do {
                 Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[0]);
-                min =getInt();
-            } while (min<boundMin||min>boundMax);
+                min = getInt();
+            } while (min < boundMin || min > boundMax);
             int max;
             do {
                 Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[1]);
-                max =getInt();
-            } while (max>boundMax||max<boundMin);
+                max = getInt();
+            } while (max > boundMax || max < boundMin);
             randomInit(array, min, max);
             Printer.print(Arrays.toString(array) + "\n");
         } else {
             Printer.printError(MSG_INVALID_KEYWORD);
-            fillArrayWithSelectTypeInit(array);
+            fillArrayWithSelectTypeInitWithControllingBounds(array, boundMin, boundMax);
         }
     }
 
@@ -206,7 +208,7 @@ public class ArrayManager {
     public static String[] concatenateArraysWithReplacementElement(String[] array1, String[] array2, int index)
             throws InvalidSizeOfArrayException, InvalidObjectException, IOException {
         validateArrayWithObjectTypeElements(array1, array2);
-        if (index > array1.length-1||index<0) {
+        if (index > array1.length - 1 || index < 0) {
             throw new IOException();
         }
         String[] result = new String[(array1.length - 1) + array2.length];
