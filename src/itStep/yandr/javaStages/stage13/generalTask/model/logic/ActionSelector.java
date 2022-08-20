@@ -9,6 +9,7 @@ import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 import java.io.IOException;
 
 import static itStep.yandr.javaStages.stage13.generalTask.model.logic.ArrayLogic.*;
+import static java.lang.System.arraycopy;
 
 public class ActionSelector {
 
@@ -30,9 +31,8 @@ public class ActionSelector {
                     results[i] = new double[]{calculateArithmeticAverage(array)};
                     break;
                 case (NAME_SWAP_EXTREME_VALUES):
-//                 !!! correct multiple call problem
                     swapMinMaxElements(array);
-                    results[i] = array;
+                    results[i] =array.clone();
                     break;
                 case (NAME_SUM_MODULES_ARE_LESS_THAN_AVERAGE):
                     results[i] = new double[]{calculateSumOfAbsoluteValuesAreLessThanAverage(array)};
