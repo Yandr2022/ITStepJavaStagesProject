@@ -288,7 +288,7 @@ short[] original => The array from which a range is to be copied.
 
 e. Using Object.clone():
 A Java array implements the Cloneable interface internally, so a Java array can be cloned. When cloning one-dimensional arrays, a deep copy of the array elements is created,
- which copies the values.But when cloning two-dimensional or multidimensional arrays, a shallow copy of the elements is created, i.e. only links are copied.
+ which copies the values. But when cloning two-dimensional or multidimensional arrays, a shallow copy of the elements is created, i.e. only links are copied.
 
     int src_Array[] = {5,10,15,20,25,30};
      int clone_Array[] = src_Array.clone();

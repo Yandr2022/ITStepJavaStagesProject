@@ -29,9 +29,8 @@ public class AcademicPerformanceAnalyzer {
     }
 
     private static double calculatePercentageOfTotalNumberOfElements(int number, int total) {
-        return  ((double) number / total) * 100;
+        return ((double) number / total) * 100;
     }
-
 
 
     /**

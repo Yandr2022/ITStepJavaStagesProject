@@ -94,11 +94,11 @@ public class ArrayManager {
     public static void fillArrayWithSelectTypeInit(int[] array) throws InvalidSizeOfArrayException {
         validateArray(array);
         Printer.print(INITIAL_MSG_FOR_FILL_WITH_SELECT);
-        String kw = getStringWithLetter();
-        if (kw.equals(KEYWORD_USER_INIT)) {
+        String kw = getStringWithLetter().toLowerCase();
+        if (kw.equals(KEYWORD_USER_INIT.toLowerCase())) {
             userInit(array, INITIAL_MSG_FOR_USER_INIT);
 
-        } else if (kw.equals(KEYWORD_RANDOM_INIT)) {
+        } else if (kw.equals(KEYWORD_RANDOM_INIT.toLowerCase())) {
             Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[0]);
             int min = getInt();
             Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[1]);
@@ -115,11 +115,11 @@ public class ArrayManager {
             throws InvalidSizeOfArrayException {
         validateArray(array);
         Printer.print(INITIAL_MSG_FOR_FILL_WITH_SELECT);
-        String kw = getStringWithLetter();
-        if (kw.equals(KEYWORD_USER_INIT)) {
+        String kw = getStringWithLetter().toLowerCase();
+        if (kw.equals(KEYWORD_USER_INIT.toLowerCase())) {
             userInitWithControllingBounds(array, INITIAL_MSG_FOR_USER_INIT, boundMin, boundMax);
             Printer.print(Arrays.toString(array) + "\n");
-        } else if (kw.equals(KEYWORD_RANDOM_INIT)) {
+        } else if (kw.equals(KEYWORD_RANDOM_INIT.toLowerCase())) {
             int min;
             do {
                 Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[0]);
@@ -141,11 +141,11 @@ public class ArrayManager {
     public static void fillArrayWithSelectTypeInit(double[] array) throws InvalidSizeOfArrayException, InvalidObjectException {
         validateArray(array);
         Printer.print(INITIAL_MSG_FOR_FILL_WITH_SELECT);
-        String kw = getStringWithLetter();
-        if (kw.equals(KEYWORD_USER_INIT)) {
+        String kw = getStringWithLetter().toLowerCase();
+        if (kw.equals(KEYWORD_USER_INIT.toLowerCase())) {
             userInit(array, INITIAL_MSG_FOR_USER_INIT);
 
-        } else if (kw.equals(KEYWORD_RANDOM_INIT)) {
+        } else if (kw.equals(KEYWORD_RANDOM_INIT.toLowerCase())) {
             Printer.print(INITIAL_MSG_FOR_RANDOM_INIT[1]);
             double max = InputManager.getDouble();
             randomInit(array, max);

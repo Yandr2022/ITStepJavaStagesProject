@@ -1,10 +1,10 @@
 package itStep.yandr.javaStages.stage13.generalTask.model.logic;
+
 import static itStep.yandr.javaStages.stage13.util.DataValidator.*;
 
 import itStep.yandr.javaStages.stage13.exception.InvalidSizeOfArrayException;
 
 public class ArrayLogic {
-
 
 
     public static int findMaxValueIndex(double[] array) throws InvalidSizeOfArrayException {
@@ -50,7 +50,7 @@ public class ArrayLogic {
         array[minI] = temp;
     }
 
-    public static double calculateSumOfAbsoluteValuesAreLessThanAverage(double[]array) throws InvalidSizeOfArrayException {
+    public static double calculateSumOfAbsoluteValuesAreLessThanAverage(double[] array) throws InvalidSizeOfArrayException {
         validateArray(array);
         if (array.length == 1) {
             return 0;

@@ -14,13 +14,13 @@ public class MainMarks {
     public static void main(String[] args) {
         int[] array = new int[ArrayManager.getSizeOfArray("marks: ")];
         try {
-        ArrayManager.fillArrayWithSelectTypeInitWithControllingBounds(array,MARKS[MARKS.length-1],MARKS[0]);
-                double [] results = AcademicPerformanceAnalyzer.calculatePercentageOfMarks(array);
-            String msg = MsgBuilder.buildMsg("%",results,"fives","fours","triplets","deuces"
-                    ,"units","zeros");
+            ArrayManager.fillArrayWithSelectTypeInitWithControllingBounds(array, MARKS[MARKS.length - 1], MARKS[0]);
+            double[] results = AcademicPerformanceAnalyzer.calculatePercentageOfMarks(array);
+            String msg = MsgBuilder.buildMsg("%", results, "fives", "fours", "triplets", "deuces"
+                    , "units", "zeros");
             Printer.print(msg);
-            } catch (InvalidSizeOfArrayException | InvalidObjectException e) {
-                e.printStackTrace();
-            }
+        } catch (InvalidSizeOfArrayException | InvalidObjectException e) {
+            e.printStackTrace();
+        }
     }
 }
