@@ -42,33 +42,35 @@ public class ArrayLogicTest {
 
     @Test
     public void testCheckMirroredArrangementOfElementsReturnTrue() throws InvalidSizeOfArrayException {
-        double[][] arrays ={ {2.5,7,0,9,9,0,7,2.5},{2.5,7,0,9,7,9,0,7,2.5}};
-        for (double[]array:arrays) {
-          assertTrue(ArrayLogic.checkMirroredDispositionOfElements(array));
+        double[][] arrays = {{2.5, 7, 0, 9, 9, 0, 7, 2.5}, {2.5, 7, 0, 9, 7, 9, 0, 7, 2.5}};
+        for (double[] array : arrays) {
+            assertTrue(ArrayLogic.checkMirroredDispositionOfElements(array));
         }
     }
 
     @Test
     public void testCheckMirroredArrangementOfElementsReturnFalse() throws InvalidSizeOfArrayException {
-        double[][] arrays ={ {2.5,7,1,0,9,9,0,7,2.5},{2.5,7,1,0,9,7,9,0,7,2.5}};
-        for (double[]array:arrays) {
+        double[][] arrays = {{2.5, 7, 1, 0, 9, 9, 0, 7, 2.5}, {2.5, 7, 1, 0, 9, 7, 9, 0, 7, 2.5}};
+        for (double[] array : arrays) {
             assertFalse(ArrayLogic.checkMirroredDispositionOfElements(array));
         }
 
     }
+
     @Test
     public void testCheckMirroredArrangementOfElementsWithTwoElements() throws InvalidSizeOfArrayException {
-        double[][] arrays ={ {7,2.5},{2.5,2.5}};
-        boolean [] expected = {false,true};
-        for (int i = 0;i< expected.length;i++) {
+        double[][] arrays = {{7, 2.5}, {2.5, 2.5}};
+        boolean[] expected = {false, true};
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], ArrayLogic.checkMirroredDispositionOfElements(arrays[i]));
         }
     }
+
     @Test
     public void testCheckMirroredArrangementOfElementsWithThreeElements() throws InvalidSizeOfArrayException {
-        double[][] arrays ={ {7,2.5,7.6},{2.5,6,2.5}};
-        boolean [] expected = {false,true};
-        for (int i = 0;i< expected.length;i++) {
+        double[][] arrays = {{7, 2.5, 7.6}, {2.5, 6, 2.5}};
+        boolean[] expected = {false, true};
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], ArrayLogic.checkMirroredDispositionOfElements(arrays[i]));
         }
     }
@@ -113,19 +115,21 @@ public class ArrayLogicTest {
             assertEquals(error, expected, ArrayLogic.checkEqualityOrDifferenceNumbersOfSequence(doubles));
         }
     }
+
     @Test
     public void testDefineTheNumberOfEvenElementsBasic() {
-        int[][]arrays = {{3,6,-8,5,7,5,0},{1,5,78,2,89,67,-1},{4,7,1,89,75,9},{5,7,9,13,17,35}};
-        int []expected ={3,2,1,0};
+        int[][] arrays = {{3, 6, -8, 5, 7, 5, 0}, {1, 5, 78, 2, 89, 67, -1}, {4, 7, 1, 89, 75, 9}, {5, 7, 9, 13, 17, 35}};
+        int[] expected = {3, 2, 1, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array" + Arrays.toString(arrays[i]);
             assertEquals(error, expected[i], ArrayLogic.countTheNumberOfEvenElements(arrays[i]));
         }
     }
+
     @Test
     public void testDefineTheNumberOfEvenElementsWithOneElements() {
         int[][] arrays = {{-2}, {57}};
-        int[] expected = { 1, 0};
+        int[] expected = {1, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
             assertEquals(error, expected[i], ArrayLogic.countTheNumberOfEvenElements(arrays[i]));
@@ -140,19 +144,21 @@ public class ArrayLogicTest {
             assertEquals(error, expected, ArrayLogic.countTheNumberOfEvenElements(INVALID_ARRAYS_INT[i]));
         }
     }
+
     @Test
     public void testDefineTheNumberOfOddElementsBasic() {
-        int[][]arrays = {{3,6,-8,5,7,52,0},{10,5,78,2,89,70},{8,6,10,90,72,9},{54,0,96,18,20,34}};
-        int []expected ={3,2,1,0};
+        int[][] arrays = {{3, 6, -8, 5, 7, 52, 0}, {10, 5, 78, 2, 89, 70}, {8, 6, 10, 90, 72, 9}, {54, 0, 96, 18, 20, 34}};
+        int[] expected = {3, 2, 1, 0};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array" + Arrays.toString(arrays[i]);
             assertEquals(error, expected[i], ArrayLogic.countTheNumberOfOddElements(arrays[i]));
         }
     }
+
     @Test
     public void testDefineTheNumberOfOddElementsWithOneElements() {
         int[][] arrays = {{-2}, {57}};
-        int[] expected = { 0,1};
+        int[] expected = {0, 1};
         for (int i = 0; i < expected.length; i++) {
             String error = "Error while checking an array " + Arrays.toString(arrays[i]);
             assertEquals(error, expected[i], ArrayLogic.countTheNumberOfOddElements(arrays[i]));
