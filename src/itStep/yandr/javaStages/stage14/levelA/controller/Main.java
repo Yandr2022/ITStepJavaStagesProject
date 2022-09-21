@@ -17,6 +17,7 @@ public class Main {
          NUM = new Inverter(NUM);
 
 
+
         System.out.println(count(NUM, -8, 2, 3, 4, -5, 0, -2));
 //        System.out.println(count(NUM, -8, 2, 3, 4, -5, 0, -2));
     }
