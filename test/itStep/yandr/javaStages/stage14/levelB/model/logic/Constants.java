@@ -5,7 +5,7 @@ import itStep.yandr.javaStages.stage14.levelB.model.logic.decorator.Inverter;
 import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.*;
 
 public interface Constants {
-   int[][] INVALID_ARRAYS = {null, new int[0],{0}};
+   int[][] INVALID_ARRAYS = {null, new int[0]};
    int INVALID_RESULT = -1;
    int EMPTY_RESULT = 0;
    ElementCountable GREATER = new CountGreaterElements();
