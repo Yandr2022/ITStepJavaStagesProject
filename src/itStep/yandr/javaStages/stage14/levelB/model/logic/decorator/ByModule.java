@@ -5,7 +5,6 @@ import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.ElementCounta
 public class ByModule extends Decorator {
 
 
-
     public ByModule(ElementCountable countable) {
         super(countable);
     }

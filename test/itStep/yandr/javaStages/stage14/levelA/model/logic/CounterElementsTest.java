@@ -68,7 +68,7 @@ public class CounterElementsTest {
     }
 
     @Test
-    public void testCountNonZeroElementsWithInvalidArrays() {
+    public void testCountElementsWithInvalidArrays() {
         for (int i = 0; i < BEHAVIOR_OBJECTS.length; i++) {
             for (int j = 0; j < INVALID_ARRAYS.length; j++) {
                 Assert.assertEquals(INVALID_RESULT, count(BEHAVIOR_OBJECTS[i], INVALID_ARRAYS[j]));

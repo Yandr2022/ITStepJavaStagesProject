@@ -2,10 +2,11 @@ package itStep.yandr.javaStages.stage14.levelB.model.logic.decorator;
 
 import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.ElementCountable;
 
- public abstract class Decorator implements ElementCountable  {
+public abstract class Decorator implements ElementCountable {
     ElementCountable countable;
+
     protected Decorator(ElementCountable countable) {
-        this.countable =countable;
+        this.countable = countable;
     }
 
     public ElementCountable getCountable() {
@@ -17,14 +18,14 @@ import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.ElementCounta
     }
 
 
-     public boolean equals(Object obj) {
-         return (countable.getClass() == obj.getClass());
-     }
+    public boolean equals(Object obj) {
+        return (countable.getClass() == obj.getClass());
+    }
 
-     @Override
-     public String toString() {
-         return "Decorator{" + this.getClass().getName()+
-                 "countable=" + countable.getClass().getName() +
-                 '}';
-     }
- }
+    @Override
+    public String toString() {
+        return "Decorator{" + this.getClass().getName() +
+                "countable=" + countable.getClass().getName() +
+                '}';
+    }
+}
