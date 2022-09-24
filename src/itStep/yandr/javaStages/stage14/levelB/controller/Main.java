@@ -7,6 +7,8 @@ import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.CountEqualsEl
 import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.ElementCountable;
 import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.CountMultipleElements;
 
+import static itStep.yandr.javaStages.stage14.levelB.model.logic.CounterElements.count;
+
 public class Main {
     public static void main(String[] args) {
         Decorator countable = new Inverter(new CountMultipleElements());
@@ -14,7 +16,8 @@ public class Main {
         Decorator inverter = new Inverter(countable2);
         inverter.setCountable(countable);
 
-        System.out.println(countable.getClass()+"\n"+countable2.getClass()) ;
-        System.out.println(countable.equals(countable2));
+
+//        System.out.println() ;
+        System.out.println(count(countable2,0,1,0,-1,6));
     }
 }
