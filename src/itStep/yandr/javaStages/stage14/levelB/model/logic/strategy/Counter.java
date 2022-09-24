@@ -1,6 +1,5 @@
 package itStep.yandr.javaStages.stage14.levelB.model.logic.strategy;
 
-import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.ElementCountable;
 
 public abstract class Counter implements ElementCountable {
 
