@@ -21,4 +21,10 @@ import itStep.yandr.javaStages.stage14.levelB.model.logic.strategy.ElementCounta
          return (countable.getClass() == obj.getClass());
      }
 
+     @Override
+     public String toString() {
+         return "Decorator{" + this.getClass().getName()+
+                 "countable=" + countable.getClass().getName() +
+                 '}';
+     }
  }
