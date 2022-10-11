@@ -24,8 +24,8 @@ public abstract class Decorator implements ElementCountable {
 
     @Override
     public String toString() {
-        return "Decorator{" + this.getClass().getName() +
-                "countable=" + countable.getClass().getName() +
+        return "Decorator{ " + this.getClass().getName() +"\n"+
+                "countable = " + countable.getClass().getName() +"\n"+
                 '}';
     }
 }
