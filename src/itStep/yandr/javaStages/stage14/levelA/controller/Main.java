@@ -1,24 +1,34 @@
 package itStep.yandr.javaStages.stage14.levelA.controller;
 
 
+
+import static itStep.yandr.javaStages.stage14.levelA.model.logic.Constants.BEHAVIOR_OBJECTS;
+import static itStep.yandr.javaStages.stage14.levelA.model.logic.Constants.DESCRIPTIONS;
 import static itStep.yandr.javaStages.stage14.levelA.model.logic.CounterElements.count;
 
-import itStep.yandr.javaStages.stage14.levelA.model.logic.strategy.CountEvenNumbers;
-import itStep.yandr.javaStages.stage14.levelA.model.logic.strategy.CountNumbersEqualsZero;
-import itStep.yandr.javaStages.stage14.levelA.model.logic.strategy.CountPositiveNumbers;
-import itStep.yandr.javaStages.stage14.levelA.model.logic.strategy.ElementCountable;
-import itStep.yandr.javaStages.stage14.levelA.model.logic.decorator.Inverter;
+
+import itStep.yandr.javaStages.stage14.exception.InvalidObjectException;
+import itStep.yandr.javaStages.stage14.exception.InvalidSizeOfArrayException;
+
+import itStep.yandr.javaStages.stage14.util.ArrayInitializer;
+import itStep.yandr.javaStages.stage14.view.MsgBuilder;
 
 public class Main {
+
     public static void main(String[] args) {
-        ElementCountable NUM = new CountPositiveNumbers();
-         NUM = new CountNumbersEqualsZero();
-         NUM = new CountEvenNumbers();
-         NUM = new Inverter(NUM);
+        int array[] = new int[ArrayInitializer.getSizeOfArray("numbers")];
+        try {
+            ArrayInitializer.fillArrayWithSelectTypeInit(array);
+            int[]result = new int[BEHAVIOR_OBJECTS.length];
+            for (int i = 0; i < result.length ; i++) {
+                result[i]=count(BEHAVIOR_OBJECTS[i]);
+            }
+            MsgBuilder.buildMsg(result, DESCRIPTIONS);
+
+        } catch (InvalidSizeOfArrayException | InvalidObjectException e) {
+           e.printStackTrace();
+        }
 
 
-
-        System.out.println(count(NUM, -8, 2, 3, 4, -5, 0, -2));
-//        System.out.println(count(NUM, -8, 2, 3, 4, -5, 0, -2));
     }
 }
